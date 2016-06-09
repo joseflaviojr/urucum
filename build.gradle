@@ -52,7 +52,7 @@ jar {
 
 task jarFonte(type: Jar) {
     
-    classifier = "src"
+    classifier = "sources"
     from sourceSets.main.allSource
 
     manifest {
@@ -67,7 +67,7 @@ task jarFonte(type: Jar) {
 
 task jarDoc(type: Jar) {
 
-    classifier = "doc"
+    classifier = "javadoc"
     from javadoc
 
     javadoc.options.encoding = codificacao
