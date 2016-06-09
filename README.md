@@ -4,17 +4,17 @@ Utilitários para desenvolvimento de software em Java.
 
 Tools for Java software development.
 
-# Versão Atual / Current Version
+## Versão Atual / Current Version
 
 1.0-A1
 
 Padrão de versionamento: http://joseflavio.com/jfv/
 
-# Requisitos / Requirements
+## Requisitos / Requirements
 
 * Java 1.6
 
-# Uso / Use
+## Uso / Use
 
 Gradle:
 
@@ -28,7 +28,7 @@ Maven:
         <version>1.0-A1</version>
     </dependency>
 
-# Desenvolvimento / Development
+## Desenvolvimento / Development
 
 Execute o comando a seguir e importe o projeto no Eclipse IDE.
 
@@ -36,6 +36,6 @@ Run the following command and import the project in Eclipse IDE.
 
     gradle eclipse
 
-# Compilação / Compilation
+## Compilação / Compilation
 
     gradle clean build
