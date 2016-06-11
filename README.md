@@ -8,11 +8,11 @@ Tools for Java software development.
 
 1.0-A1
 
-Padrão de versionamento: http://joseflavio.com/jfv/
+Padrão de versionamento: [JFV](http://joseflavio.com/jfv)
 
 ## Requisitos / Requirements
 
-* Java 1.6
+* Java >= 1.6
 
 ## Uso / Use
 
