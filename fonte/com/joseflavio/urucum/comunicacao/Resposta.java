@@ -44,6 +44,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.joseflavio.urucum.comunicacao.Mensagem.Tipo;
 
 /**
@@ -56,6 +59,7 @@ public class Resposta <T extends Serializable> implements Serializable {
 	
 	private boolean exito;
 	
+	@JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="@classe")
 	private T resultado;
 	
 	private List<Mensagem> mensagens;

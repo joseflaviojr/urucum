@@ -41,6 +41,10 @@ package com.joseflavio.urucum.comunicacao;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 /**
  * Mensagem de {@link Resposta}.
  * @author José Flávio de Souza Dias Júnior
@@ -53,6 +57,7 @@ public class Mensagem implements Serializable {
 	
 	private String referencia;
 	
+	@JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="@classe")
 	private Serializable argumento;
 	
 	/**
@@ -77,6 +82,10 @@ public class Mensagem implements Serializable {
 	
 	public Mensagem( Serializable argumento ) {
 		this( Tipo.ERRO, null, argumento );
+	}
+	
+	public Mensagem() {
+		this( Tipo.ERRO, null, null );
 	}
 	
 	/**
