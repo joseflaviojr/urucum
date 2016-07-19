@@ -12,7 +12,7 @@ String descricao = "Utilitários para desenvolvimento de software em Java."
 
 group = "com.joseflavio"
 archivesBaseName = "urucum"
-version = "1.0-A2"
+version = "1.0-A3"
 
 //------------------------------------------------------
 
