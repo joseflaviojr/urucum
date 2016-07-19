@@ -87,4 +87,12 @@ public class StringUtil {
 		
 	}
 	
+	/**
+	 * {@link String#length()}
+	 * @return 0, se <code>null</code>
+	 */
+	public static int tamanho( String texto ) {
+		return texto != null ? texto.length() : 0;
+	}
+	
 }

@@ -49,9 +49,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import com.joseflavio.urucum.aparencia.Nome;
 import com.joseflavio.urucum.array.ArrayUtil;
@@ -82,18 +84,56 @@ public class ValidacaoUtil {
 	 * @param recursivamente Validar recursivamente os objetos internos?
 	 * @param args Argumentos para {@link Validador}. Opcional.
 	 * @param fonte {@link ResourceBundle} com as mensagens textuais. Opcional.
+	 * @param desconsiderar {@link Escopo}s a desconsiderar. Opcional.
 	 * @return <code>true</code>, se objeto totalmente válido.
 	 */
 	public static boolean validar(
 			Object objeto, List<Mensagem> mensagens, boolean recursivamente,
-			Map<String,Object> args, ResourceBundle fonte )
+			Map<String,Object> args, ResourceBundle fonte, Set<String> desconsiderar )
+			throws IllegalAccessException, InstantiationException, InvocationTargetException {
+		return validar0( objeto, mensagens, recursivamente, args, fonte, desconsiderar, new HashSet<Object>() );
+	}
+	
+	/**
+	 * @see #validar(Object, List, boolean, Map, ResourceBundle, Set)
+	 */
+	public static boolean validar(
+			Object objeto, List<Mensagem> mensagens, boolean recursivamente,
+			Map<String,Object> args, ResourceBundle fonte, String... desconsiderar )
+			throws IllegalAccessException, InstantiationException, InvocationTargetException {
+		Set<String> conjunto = new HashSet<String>();
+		for( String escopo : desconsiderar ) conjunto.add( escopo );
+		return validar( objeto, mensagens, recursivamente, args, fonte, conjunto );
+	}
+	
+	/**
+	 * @see #validar(Object, List, boolean, Map, ResourceBundle, Set)
+	 */
+	public static boolean validar(
+			Object objeto, List<Mensagem> mensagens, ResourceBundle fonte, String... desconsiderar )
+			throws IllegalAccessException, InstantiationException, InvocationTargetException {
+		return validar( objeto, mensagens, true, null, fonte, desconsiderar );
+	}
+	
+	private static boolean validar0(
+			Object objeto, List<Mensagem> mensagens, boolean recursivamente,
+			Map<String,Object> args, ResourceBundle fonte, Set<String> desconsiderar, Set<Object> validados )
 			throws IllegalAccessException, InstantiationException, InvocationTargetException {
 		
-		boolean objetoValido = true;
-		Class<?> classe      = objeto.getClass();
-		List<Object> msgArgs = null;
+		validados.add( objeto );
+		
+		boolean      objetoValido = true;
+		Class<?>     classe       = objeto.getClass();
+		List<Object> msgArgs      = null;
 		
 		for( Field campo : JavaBeansUtil.getCampos( classe ) ){
+			
+			if( desconsiderar != null && ! desconsiderar.isEmpty() ){
+				Escopo escopo = campo.getAnnotation( Escopo.class );
+				if( escopo != null && desconsiderar.contains( escopo.value() ) ){
+					continue;
+				}
+			}
 			
 			NaoNulo        valNaoNulo   = campo.getAnnotation( NaoNulo.class );
 			NaoVazio       valNaoVazio  = campo.getAnnotation( NaoVazio.class );
@@ -121,19 +161,19 @@ public class ValidacaoUtil {
 				nome   = id;
 				genero = 0;
 				numero = 0;
-			}else if( nomeAnot.masculino() != null ){
+			}else if( StringUtil.tamanho( nomeAnot.masculino() ) > 0 ){
 				nome   = nomeAnot.masculino();
 				genero = 0;
 				numero = 0;
-			}else if( nomeAnot.feminino() != null ){
+			}else if( StringUtil.tamanho( nomeAnot.feminino() ) > 0 ){
 				nome   = nomeAnot.feminino();
 				genero = 1;
 				numero = 0;
-			}else if( nomeAnot.masculinoPlural() != null ){
+			}else if( StringUtil.tamanho( nomeAnot.masculinoPlural() ) > 0 ){
 				nome   = nomeAnot.masculinoPlural();
 				genero = 0;
 				numero = 1;
-			}else if( nomeAnot.femininoPlural() != null ){
+			}else if( StringUtil.tamanho( nomeAnot.femininoPlural() ) > 0 ){
 				nome   = nomeAnot.femininoPlural();
 				genero = 1;
 				numero = 1;
@@ -256,8 +296,9 @@ public class ValidacaoUtil {
 			String tipoNome = tipo.getName();
 			if( recursivamente && valor != null &&
 				! tipo.isArray() && ! tipo.isPrimitive() &&
-				! tipoNome.startsWith( "java." ) && ! tipoNome.startsWith( "javax." ) ){
-				if( ! validar( valor, mensagens, recursivamente, args, fonte ) ){
+				! tipoNome.startsWith( "java." ) && ! tipoNome.startsWith( "javax." ) &&
+				! validados.contains( valor ) ){
+				if( ! validar0( valor, mensagens, recursivamente, args, fonte, desconsiderar, validados ) ){
 					objetoValido = false;
 				}
 			}
