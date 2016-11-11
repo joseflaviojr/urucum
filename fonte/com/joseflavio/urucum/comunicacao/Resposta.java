@@ -59,6 +59,8 @@ public class Resposta <T extends Serializable> implements Serializable {
 	
 	private boolean exito;
 	
+	private int codigo;
+	
 	@JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="@classe")
 	private T resultado;
 	
@@ -66,13 +68,19 @@ public class Resposta <T extends Serializable> implements Serializable {
 
 	/**
 	 * @param exito Veja {@link #isExito()}
+	 * @param codigo Veja {@link #getCodigo()}
 	 * @param resultado Veja {@link #getResultado()}
 	 * @param mensagens Veja {@link #setMensagens(List)}
 	 */
-	public Resposta( boolean exito, T resultado, List<Mensagem> mensagens ) {
+	public Resposta( boolean exito, int codigo, T resultado, List<Mensagem> mensagens ) {
 		this.exito = exito;
+		this.codigo = codigo;
 		this.resultado = resultado;
 		this.mensagens = mensagens != null ? mensagens : new ArrayList<Mensagem>();
+	}
+	
+	public Resposta( boolean exito, T resultado, List<Mensagem> mensagens ) {
+		this( exito, 0, resultado, mensagens );
 	}
 	
 	public Resposta( boolean exito, T resultado, Mensagem mensagem, Mensagem... outras ) {
@@ -134,6 +142,18 @@ public class Resposta <T extends Serializable> implements Serializable {
 	public Resposta<T> setExito( boolean exito ) {
 		this.exito = exito;
 		return this;
+	}
+	
+	/**
+	 * Código que especifica numericamente a {@link Resposta}.<br>
+	 * Normalmente código de erro, quando não {@link Resposta#isExito()}.
+	 */
+	public int getCodigo() {
+		return codigo;
+	}
+	
+	public void setCodigo( int codigo ) {
+		this.codigo = codigo;
 	}
 
 	/**

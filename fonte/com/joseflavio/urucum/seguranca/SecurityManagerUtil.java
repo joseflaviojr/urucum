@@ -59,7 +59,7 @@ public class SecurityManagerUtil {
 	 * Imprime {@link Permission permissões} em {@link Writer}, formatando-as conforme especificação.
 	 * @param permissoes {@link Permission}s a imprimir.
 	 * @param saida Destino da impressão textual.
-	 * @param formatoArquivo Imprimir {@link Permission} no formato de {@link sun.security.provider.PolicyFile PolicyFile}.
+	 * @param formatoArquivo Imprimir {@link Permission} no formato de <code>sun.security.provider.PolicyFile</code>.
 	 * @param prefixo Prefixo a ser concatenado.
 	 * @param sufixo Sufixo a ser concatenado.
 	 */

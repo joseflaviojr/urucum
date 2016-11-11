@@ -55,7 +55,7 @@ import java.util.Map;
 
 /**
  * {@link Policy} simplificada, a qual não depende de
- * arquivos externos ({@link sun.security.provider.PolicyFile PolicyFile}).
+ * arquivos externos (<code>sun.security.provider.PolicyFile</code>).
  * @author José Flávio de Souza Dias Júnior
  * @see #adicionar(Permission)
  */

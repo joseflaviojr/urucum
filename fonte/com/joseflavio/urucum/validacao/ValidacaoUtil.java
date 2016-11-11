@@ -128,6 +128,10 @@ public class ValidacaoUtil {
 		
 		for( Field campo : JavaBeansUtil.getCampos( classe ) ){
 			
+			Regras regrasAnot = campo.getAnnotation( Regras.class );
+			Field regras = regrasAnot != null ? JavaBeansUtil.procurarCampo( regrasAnot.classe(), regrasAnot.campo() ) : campo;
+			if( regras == null ) throw new IllegalArgumentException( "Campo desconhecido: " + regrasAnot.classe() + "." + regrasAnot.campo() );
+			
 			if( desconsiderar != null && ! desconsiderar.isEmpty() ){
 				Escopo escopo = campo.getAnnotation( Escopo.class );
 				if( escopo != null && desconsiderar.contains( escopo.value() ) ){
@@ -135,12 +139,12 @@ public class ValidacaoUtil {
 				}
 			}
 			
-			NaoNulo        valNaoNulo   = campo.getAnnotation( NaoNulo.class );
-			NaoVazio       valNaoVazio  = campo.getAnnotation( NaoVazio.class );
-			Tamanho        valTamanho   = campo.getAnnotation( Tamanho.class );
-			LimiteNumerico valLimNum    = campo.getAnnotation( LimiteNumerico.class );
-			Formato        valFormato   = campo.getAnnotation( Formato.class );
-			Validacao      valValidacao = campo.getAnnotation( Validacao.class );
+			NaoNulo        valNaoNulo   = regras.getAnnotation( NaoNulo.class );
+			NaoVazio       valNaoVazio  = regras.getAnnotation( NaoVazio.class );
+			Tamanho        valTamanho   = regras.getAnnotation( Tamanho.class );
+			LimiteNumerico valLimNum    = regras.getAnnotation( LimiteNumerico.class );
+			Formato        valFormato   = regras.getAnnotation( Formato.class );
+			Validacao      valValidacao = regras.getAnnotation( Validacao.class );
 			
 			if( ArrayUtil.isTodosNulos(
 					valNaoNulo, valNaoVazio, valTamanho,
