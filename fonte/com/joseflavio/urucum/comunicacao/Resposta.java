@@ -61,7 +61,6 @@ public class Resposta <T extends Serializable> implements Serializable {
 	
 	private int codigo;
 	
-	@JsonTypeInfo(use=Id.CLASS, include=As.PROPERTY, property="@classe")
 	private T resultado;
 	
 	private List<Mensagem> mensagens;

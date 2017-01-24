@@ -39,21 +39,22 @@
 
 package com.joseflavio.urucum.json;
 
-import java.io.Serializable;
-import java.util.Locale;
-import java.util.Map;
-
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import java.io.Serializable;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * Decoração de {@link JSONObject}.
  * @author José Flávio de Souza Dias Júnior
  */
+@JsonTypeInfo(use=JsonTypeInfo.Id.NONE)
 @JsonSerialize(using=JSONSerializador.class)
 @JsonDeserialize(using=JSONDesserializador.class)
 public class JSON extends JSONObject implements Serializable {

@@ -47,6 +47,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 
 /**
  * {@link JsonDeserializer} de {@link JSON}.
@@ -75,6 +76,11 @@ public class JSONDesserializador extends StdDeserializer<JSON> {
 	@Override
 	public JSON deserialize( JsonParser p, DeserializationContext ctxt ) throws IOException, JsonProcessingException {
 		return new JSON( p.readValueAsTree().toString() );
+	}
+
+	@Override
+	public Object deserializeWithType( JsonParser p, DeserializationContext ctxt, TypeDeserializer typeDeserializer ) throws IOException {
+		return deserialize( p, ctxt );
 	}
 
 }

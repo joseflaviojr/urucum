@@ -102,7 +102,7 @@ public class Arquivo implements Serializable {
 	}
 	
 	/**
-	 * Conteúdo direto do arquivo, podendo ou não corresponder ao conteúdo original,
+	 * Conteúdo direto, podendo ou não corresponder ao conteúdo original do arquivo,
 	 * disponível em {@link #getEndereco()}.
 	 */
 	public byte[] getConteudo() {

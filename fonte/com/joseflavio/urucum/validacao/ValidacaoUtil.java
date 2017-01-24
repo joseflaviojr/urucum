@@ -217,6 +217,7 @@ public class ValidacaoUtil {
 				long tamanho    = 0;
 				if( valor instanceof String ) tamanho = ((String)valor).length();
 				else if( valor instanceof File ) tamanho = ((File)valor).length();
+				//TODO com.joseflavio.urucum.comunicacao.Arquivo
 				else if( valor instanceof Collection<?> ) tamanho = ((Collection<?>)valor).size();
 				else if( valor instanceof Map<?,?> ) tamanho = ((Map<?,?>)valor).size();
 				else if( valor.getClass().isArray() ) tamanho = Array.getLength( valor );

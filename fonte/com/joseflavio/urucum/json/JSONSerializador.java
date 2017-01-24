@@ -45,6 +45,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 /**
@@ -78,6 +79,11 @@ public class JSONSerializador extends StdSerializer<JSON> {
 	@Override
 	public void serialize( JSON value, JsonGenerator gen, SerializerProvider provider ) throws IOException {
 		gen.writeRawValue( value.toString() );
+	}
+
+	@Override
+	public void serializeWithType( JSON value, JsonGenerator gen, SerializerProvider provider, TypeSerializer typeSer ) throws IOException {
+		serialize( value, gen, provider );
 	}
 
 }
