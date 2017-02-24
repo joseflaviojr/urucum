@@ -6,28 +6,28 @@ Tools for Java software development.
 
 ## Versão Atual / Current Version
 
-1.0-A5
+1.0-A6
 
 Padrão de versionamento: [JFV](http://joseflavio.com/jfv)
 
 ## Requisitos / Requirements
 
 * Git >= 1.8
-* Java >= 1.6
+* Java >= 1.8
 * Gradle >= 2.0
 
 ## Uso / Use
 
 Gradle:
 
-    compile 'com.joseflavio:urucum:1.0-A5'
+    compile 'com.joseflavio:urucum:1.0-A6'
 
 Maven:
 
     <dependency>
         <groupId>com.joseflavio</groupId>
         <artifactId>urucum</artifactId>
-        <version>1.0-A5</version>
+        <version>1.0-A6</version>
     </dependency>
 
 ## Desenvolvimento / Development

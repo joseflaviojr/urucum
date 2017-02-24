@@ -39,6 +39,7 @@
 
 package com.joseflavio.urucum.comunicacao;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -47,7 +48,7 @@ import java.io.OutputStream;
  * {@link Consumidor} de dados de {@link Servidor}.
  * @author José Flávio de Souza Dias Júnior
  */
-public interface Consumidor {
+public interface Consumidor extends Closeable {
 	
 	InputStream getInputStream() throws IOException;
 	

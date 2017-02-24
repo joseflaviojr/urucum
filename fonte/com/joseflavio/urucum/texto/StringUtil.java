@@ -51,7 +51,7 @@ import java.util.ResourceBundle;
 public class StringUtil {
 
 	/**
-	 * {@link MessageFormat Formata} uma mensagem textual, obtendo-a, se necessário e se possível, de uma {@link ResourceBundle fonte} sensível a {@link Locale}.
+	 * {@link MessageFormat Formata} uma mensagem textual, obtendo-a, se necessário e se possível, de uma {@link ResourceBundle fonte} sensível à {@link Locale}.
 	 * @param fonte {@link ResourceBundle} que contém as mensagens textuais chaveadas. Opcional.
 	 * @param mensagem Mensagem ou chave de mensagem desejada. Toda chave deve iniciar com "$" e será buscada na {@link ResourceBundle}.
 	 * @param parametros Parâmetros para {@link MessageFormat}. Podem iniciar com "$".

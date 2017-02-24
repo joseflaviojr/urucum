@@ -92,5 +92,10 @@ class DiretoConsumidor implements Consumidor {
 		leitura  = null;
 		escrita  = null;
 	}
-
+	
+	@Override
+	public void close() throws IOException {
+		fechar();
+	}
+	
 }

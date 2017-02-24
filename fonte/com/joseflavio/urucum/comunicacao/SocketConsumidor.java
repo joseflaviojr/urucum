@@ -39,11 +39,8 @@
 
 package com.joseflavio.urucum.comunicacao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.net.ssl.*;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -52,12 +49,6 @@ import java.security.SecureRandom;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.X509TrustManager;
 
 /**
  * {@link Consumidor} baseado em {@link Socket}.
@@ -199,7 +190,19 @@ public class SocketConsumidor implements Consumidor {
 	public void fechar() throws IOException {
 		if( socket == null ) throw new IOException( "Socket fechado." );
 		socket.close();
-		socket = null;
+		socket  = null;
+		entrada = null;
+		saida   = null;
+	}
+	
+	@Override
+	public void close() throws IOException {
+		if( socket != null ){
+			socket.close();
+			socket  = null;
+			entrada = null;
+			saida   = null;
+		}
 	}
 	
 	@Override
@@ -369,5 +372,5 @@ public class SocketConsumidor implements Consumidor {
 		}
 		
 	}
-
+	
 }
