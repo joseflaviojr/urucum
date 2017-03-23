@@ -1,0 +1,197 @@
+
+application/acad dwg
+application/arj arj
+application/asx asx asf
+application/coreldraw cdr
+application/dwf dwf
+application/dxf dxf
+application/ecmascript es
+application/emf emf
+application/java-archive jar
+application/java-serialized-object ser
+application/java-vm class
+application/json json
+application/binhex hqx
+application/msaccess mdb
+application/mspowerpoint ppt pps pot
+application/msproject mpp
+application/msword doc dot wiz
+application/oda oda
+application/onenote one onepkg
+application/oxps oxps
+application/pcx pcx
+application/pdf pdf
+application/pkcs-crl crl
+application/postscript ps eps ai
+application/rar rar
+application/rdf rdf
+application/rss+xml rss
+application/soffice sdw sdc
+application/studiom smp
+application/timbuktu tbt
+application/vnd.adobe.air-application-installer-package+zip air
+application/vnd.apple.pkpass pkpass
+application/vnd.fpx fpx
+application/vnd.ms-excel xls xlw xla xlc xlm xlt
+application/vnd.ms-excel.sheet.binary.macroEnabled.12 xlsb
+application/vnd.ms-powerpoint.presentation.macroEnabled.12 pptm
+application/vnd.ms-project mpd mpt
+application/vnd.ms-word.document.macroEnabled.12 docm dotm
+application/vnd.ms-works wps
+application/vnd.oasis.opendocument.formula odf
+application/vnd.oasis.opendocument.formula-template otf
+application/vnd.oasis.opendocument.graphics odg
+application/vnd.oasis.opendocument.spreadsheet ods
+application/vnd.oasis.opendocument.text odt
+application/vnd.oasis.opendocument.text-template ott
+application/vnd.openxmlformats-officedocument.presentationml.presentation pptx
+application/vnd.openxmlformats-officedocument.presentationml.slide sldx
+application/vnd.openxmlformats-officedocument.presentationml.slideshow ppsx
+application/vnd.openxmlformats-officedocument.presentationml.template potx
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet xlsx xlsm
+application/vnd.openxmlformats-officedocument.wordprocessingml.document docx
+application/vnd.openxmlformats-officedocument.wordprocessingml.template dotx
+application/vnd.sun.xml.calc sxc
+application/vnd.sun.xml.writer sxw
+application/vnd.visio vsd vsdx
+application/vnd.rn-realmedia-vbr rmvb
+application/winhlp hlp
+application/wordperfect wpd
+application/xhtml+xml xhtml
+application/xml-dtd dtd
+application/x-3ds 3ds
+application/x-apple-diskimage dmg
+application/x-bittorrent torrent
+application/x-bzip2 bz2
+application/x-cdf cda
+application/x-compressed ace
+application/x-cpio cpio
+application/x-cpt cpt
+application/x-csh csh
+application/x-dvi dvi
+application/x-earthtime etc
+application/x-envoy evy
+application/x-gtar gtar
+application/x-gzip gzip gz
+application/x-httpd-php php
+application/x-hdf hdf
+application/x-iso-image iso
+application/x-javascript js
+application/x-javascript;charset=UTF-8 jsu
+application/x-javascript-config jsc
+application/x-java-jnlp-file jnlp
+application/x-latex latex
+application/x-lzma 7zip 7z
+application/x-mif mif mi
+application/x-mocha mocha moc
+application/x-mscardfile crd
+application/x-msclip clp
+application/x-msdos-program com
+application/x-msdownload exe dll bat
+application/x-msmediaview m13 m14
+application/x-msmetafile wmf
+application/x-msmoney mny
+application/x-mspublisher pub
+application/x-msschedule scd
+application/x-msterminal trm
+application/x-ms-shortcut lnk
+application/x-navimap map
+application/x-netcdf nc
+application/x-net-install ins
+application/x-ns-proxy-autoconfig proxy
+application/x-ole-storage msi
+application/x-perl pl
+application/x-pkcs12 pfx
+application/x-pocket-word pwi
+application/x-sh sh
+application/x-shar shar
+application/x-shockwave-flash swf
+application/x-sprite spr sprite
+application/x-stuffit sit
+application/x-tar tar tgz
+application/x-tcl tcl
+application/x-tex tex
+application/x-texinfo texinfo texi
+application/x-timbuktu tbp
+application/x-wri wri
+application/x-x509-ca-cert cacert
+application/x-x509-server-cert scert
+application/x-x509-user-cert ucert
+application/x-x509-email-cert ecert
+application/zip zip
+
+audio/amr amr
+audio/basic au snd
+audio/echospeech esl
+audio/midi midi
+audio/mp3 mp3
+audio/wav wav
+audio/x-aiff aif aiff aifc
+audio/x-mpegurl m3u m3u8
+audio/x-ms-wma wma
+audio/x-pn-realaudio ra ram
+audio/x-liveaudio lam
+
+image/bmp bmp dib
+image/fif fif
+image/gif gif
+image/ief ief
+image/jpeg jpeg jpg jpe
+image/pcd pcd
+image/photoshop psd
+image/pict pic
+image/png png
+image/svg+xml svg svgz
+image/tif tiff tif
+image/vnd.djvu djvu
+image/vnd.wap.wbmp wbmp
+image/wavelet wi
+image/webp webp
+image/x-cmu-raster ras
+image/x-icon ico
+image/x-photo-cd pcd
+image/x-portable-anymap pnm
+image/x-portable-bitmap pbm
+image/x-portable-graymap pgm
+image/x-portable-pixmap ppm
+image/x-rgb rgb
+image/x-xbitmap xbm
+image/x-xpixmap xpm
+image/x-xwindowdump xwd
+
+magnus-internal/cgi cgi
+
+magnus-internal/parsed-html shtml
+
+message/rfc822 eml
+
+multipart/related mht
+
+text/calendar ics
+text/comma-separated-values csv
+text/css css
+text/html html htm
+text/plain txt text log nfo rep ini cfg config reg 1st sql lst lrc srt sub md5
+text/rtf rtf
+text/tab-separated-values tsv
+text/vnd.sun.j2me.app-descriptor jad
+text/xml xml xsd xsl xslt atom opml plist
+text/xul xul
+text/x-setext etx
+text/x-speech talk
+text/x-vcard vcf
+
+video/3gpp 3gp
+video/avi avi
+video/mp4 mp4
+video/mpeg mpeg mpg mpe mpv
+video/ogg ogv
+video/quicktime qt mov moov
+video/vivo viv vivo
+video/wavelet wv
+video/x-flv flv
+video/x-mpeg2 mpv2 mp2v
+video/x-ms-wmv wmv
+video/x-sgi-movie movie
+
+x-uuencode uu uue
