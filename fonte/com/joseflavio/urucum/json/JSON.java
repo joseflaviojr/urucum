@@ -47,6 +47,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 
@@ -114,6 +115,66 @@ public class JSON extends JSONObject implements Serializable {
 	 */
 	public JSON( String baseName, Locale locale ) throws JSONException {
 		super( baseName, locale );
+	}
+	
+	@Override
+	public JSON accumulate( String key, Object value ) throws JSONException {
+		return (JSON) super.accumulate( key, value );
+	}
+	
+	@Override
+	public JSON append( String key, Object value ) throws JSONException {
+		return (JSON) super.append( key, value );
+	}
+	
+	@Override
+	public JSON increment( String key ) throws JSONException {
+		return (JSON) super.increment( key );
+	}
+	
+	@Override
+	public JSON put( String key, boolean value ) throws JSONException {
+		return (JSON) super.put( key, value );
+	}
+	
+	@Override
+	public JSON put( String key, Collection<?> value ) throws JSONException {
+		return (JSON) super.put( key, value );
+	}
+	
+	@Override
+	public JSON put( String key, double value ) throws JSONException {
+		return (JSON) super.put( key, value );
+	}
+	
+	@Override
+	public JSON put( String key, int value ) throws JSONException {
+		return (JSON) super.put( key, value );
+	}
+	
+	@Override
+	public JSON put( String key, long value ) throws JSONException {
+		return (JSON) super.put( key, value );
+	}
+	
+	@Override
+	public JSON put( String key, Map<?,?> value ) throws JSONException {
+		return (JSON) super.put( key, value );
+	}
+	
+	@Override
+	public JSON put( String key, Object value ) throws JSONException {
+		return (JSON) super.put( key, value );
+	}
+	
+	@Override
+	public JSON putOnce( String key, Object value ) throws JSONException {
+		return (JSON) super.putOnce( key, value );
+	}
+	
+	@Override
+	public JSON putOpt( String key, Object value ) throws JSONException {
+		return (JSON) super.putOpt( key, value );
 	}
 	
 }
