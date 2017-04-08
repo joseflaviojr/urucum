@@ -39,16 +39,15 @@
 
 package com.joseflavio.urucum.comunicacao;
 
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLServerSocket;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.security.KeyStore;
 import java.security.SecureRandom;
-
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLServerSocket;
 
 /**
  * {@link Servidor} baseado em {@link ServerSocket}.
@@ -58,17 +57,47 @@ import javax.net.ssl.SSLServerSocket;
  */
 public class SocketServidor implements Servidor {
 	
+	private int porta;
+	
+	private boolean segura;
+	
+	private boolean resiliente;
+	
 	private ServerSocket socket;
 	
-    /**
-     * {@link Servidor} baseado em {@link ServerSocket}.<br>
-     * Caso se opte por comunicação segura (TLS/SSL), deve-se especificar
-     * as {@link System#setProperty(String, String) propriedades} "javax.net.ssl.keyStore"
-     * e "javax.net.ssl.keyStorePassword".
-     * @param porta Veja {@link ServerSocket#getLocalPort()}
-     * @param segura Utilizar {@link SSLServerSocket}?
-     */
+	private boolean fechado = false;
+	
+	/**
+	 * {@link Servidor} baseado em {@link ServerSocket}.<br>
+	 * Caso se opte por comunicação segura (TLS/SSL), deve-se especificar
+	 * as {@link System#setProperty(String, String) propriedades} "javax.net.ssl.keyStore"
+	 * e "javax.net.ssl.keyStorePassword".
+	 * @param porta Veja {@link ServerSocket#getLocalPort()}
+	 * @param segura Utilizar {@link SSLServerSocket}?
+	 * @param resiliente Ser resiliente a falhas?
+	 */
+	public SocketServidor( int porta, boolean segura, boolean resiliente ) throws IOException {
+		
+		this.porta = porta;
+		this.segura = segura;
+		this.resiliente = resiliente;
+		
+		try{
+			iniciar();
+		}catch( IOException e ){
+			if( ! resiliente ) throw e;
+		}
+		
+	}
+	
+	/**
+	 * {@link SocketServidor#SocketServidor(int, boolean, boolean)} sem resiliência.
+	 */
 	public SocketServidor( int porta, boolean segura ) throws IOException {
+		this( porta, segura, false );
+	}
+	
+	private void iniciar() throws IOException {
 		
 		try{
 			
@@ -107,22 +136,81 @@ public class SocketServidor implements Servidor {
 		}
 		
 	}
+	
+	private void restaurar() throws InterruptedException {
+		
+		try{
+			if( socket != null ) socket.close();
+		}catch( Exception e ){
+		}finally{
+			socket = null;
+		}
+		
+		while( socket == null ){
+			try{
+				iniciar();
+			}catch( Exception e ){
+				if( e instanceof InterruptedException ) throw (InterruptedException) e;
+				Thread.sleep( 1000 );
+			}
+		}
+		
+	}
 
 	@Override
 	public Consumidor aceitar() throws IOException {
-		if( socket == null ) throw new IOException( "ServerSocket fechado." );
-		return new SocketConsumidor( socket.accept() );
+		
+		while( true ){
+			
+			if( socket == null ){
+				if( resiliente && ! fechado ){
+					try{
+						restaurar();
+					}catch( InterruptedException e ){
+						throw new IOException( e );
+					}
+				}else{
+					throw new IOException( "ServerSocket fechado." );
+				}
+			}
+			
+			try{
+				
+				return new SocketConsumidor( socket.accept() );
+				
+			}catch( IOException e ){
+				if( resiliente && ! fechado ){
+					try{
+						socket.close();
+					}catch( IOException f ){
+					}finally{
+						socket = null;
+					}
+				}else{
+					throw e;
+				}
+			}
+			
+		}
+		
 	}
 
 	@Override
 	public boolean isAberto() {
-		return socket != null && ! socket.isClosed();
+		if( resiliente ){
+			return ! fechado;
+		}else{
+			return socket != null && ! socket.isClosed();
+		}
 	}
 
 	@Override
 	public void fechar() throws IOException {
-		socket.close();
-		socket = null;
+		fechado = true;
+		if( socket != null ){
+			socket.close();
+			socket = null;
+		}
 	}
 
 }
