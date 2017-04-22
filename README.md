@@ -6,7 +6,7 @@ Tools for Java software development.
 
 ## Versão Atual / Current Version
 
-1.0-A7
+1.0-A8
 
 Padrão de versionamento: [JFV](http://joseflavio.com/jfv)
 
@@ -20,14 +20,14 @@ Padrão de versionamento: [JFV](http://joseflavio.com/jfv)
 
 Gradle:
 
-    compile 'com.joseflavio:urucum:1.0-A7'
+    compile 'com.joseflavio:urucum:1.0-A8'
 
 Maven:
 
     <dependency>
         <groupId>com.joseflavio</groupId>
         <artifactId>urucum</artifactId>
-        <version>1.0-A7</version>
+        <version>1.0-A8</version>
     </dependency>
 
 ## Desenvolvimento / Development
