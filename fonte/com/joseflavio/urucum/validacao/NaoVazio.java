@@ -58,7 +58,7 @@ public @interface NaoVazio {
 	Criticidade criticidade() default Criticidade.ALTA;
 	
 	/**
-	 * Mensagem de erro, conforme {@link StringUtil#formatarMensagem(java.util.ResourceBundle, String, Object...)}.<br>
+	 * Mensagem de erro, conforme {@link StringUtil#formatar(java.util.ResourceBundle, String, Object...)}.<br>
 	 * Parâmetros:
 	 * <pre>
 	 * {0} = {@link String}  = {@link Nome} da variável
@@ -66,6 +66,6 @@ public @interface NaoVazio {
 	 * {2} = {@link Integer} = número do nome: 0 (singular) ou 1 (plural)
 	 * </pre>
 	 */
-	String mensagem() default "$Erro_NaoVazio";
+	String mensagem() default "Erro_NaoVazio";
 	
 }

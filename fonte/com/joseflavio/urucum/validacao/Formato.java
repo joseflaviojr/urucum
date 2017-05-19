@@ -39,14 +39,14 @@
 
 package com.joseflavio.urucum.validacao;
 
+import com.joseflavio.urucum.aparencia.Nome;
+import com.joseflavio.urucum.texto.StringUtil;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.regex.Pattern;
-
-import com.joseflavio.urucum.aparencia.Nome;
-import com.joseflavio.urucum.texto.StringUtil;
 
 /**
  * {@link String} formatada de acordo com {@link Pattern}.
@@ -65,7 +65,7 @@ public @interface Formato {
 	Criticidade criticidade() default Criticidade.ALTA;
 	
 	/**
-	 * Mensagem de erro, conforme {@link StringUtil#formatarMensagem(java.util.ResourceBundle, String, Object...)}.<br>
+	 * Mensagem de erro, conforme {@link StringUtil#formatar(java.util.ResourceBundle, String, Object...)}.<br>
 	 * Parâmetros:
 	 * <pre>
 	 * {0} = {@link String}  = {@link Nome} da variável
@@ -75,6 +75,6 @@ public @interface Formato {
 	 * {4} = {@link String}  = {@link #padrao()}
 	 * </pre>
 	 */
-	String mensagem() default "$Erro_Formato";
+	String mensagem() default "Erro_Formato";
 	
 }

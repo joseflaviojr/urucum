@@ -64,7 +64,7 @@ public @interface Validacao {
 	Criticidade criticidade() default Criticidade.ALTA;
 	
 	/**
-	 * Mensagem de erro, conforme {@link StringUtil#formatarMensagem(java.util.ResourceBundle, String, Object...)}.<br>
+	 * Mensagem de erro, conforme {@link StringUtil#formatar(java.util.ResourceBundle, String, Object...)}.<br>
 	 * Parâmetros:
 	 * <pre>
 	 * {0} = {@link String}  = {@link Nome} da variável
@@ -74,6 +74,6 @@ public @interface Validacao {
 	 * {N} = {@link String}  = outros argumentos, especificados pelo {@link Validador#validar(Object, Class, String, Object, java.util.Map, java.util.List) validador}
 	 * </pre>
 	 */
-	String mensagem() default "$Erro_Validacao";
+	String mensagem() default "Erro_Validacao";
 	
 }

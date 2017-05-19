@@ -74,7 +74,7 @@ public @interface Tamanho {
 	Criticidade criticidade() default Criticidade.ALTA;
 	
 	/**
-	 * Mensagem de erro, conforme {@link StringUtil#formatarMensagem(java.util.ResourceBundle, String, Object...)}.<br>
+	 * Mensagem de erro, conforme {@link StringUtil#formatar(java.util.ResourceBundle, String, Object...)}.<br>
 	 * Parâmetros:
 	 * <pre>
 	 * {0} = {@link String}  = {@link Nome} da variável
@@ -85,6 +85,6 @@ public @interface Tamanho {
 	 * {5} = {@link Long}    = {@link #max()}
 	 * </pre>
 	 */
-	String mensagem() default "$Erro_Tamanho";
+	String mensagem() default "Erro_Tamanho";
 	
 }

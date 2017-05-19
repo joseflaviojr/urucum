@@ -63,25 +63,25 @@ public @interface Nome {
 	
 	/**
 	 * Nome masculino no singular.
-	 * @see StringUtil#formatarMensagem(java.util.ResourceBundle, String, Object...)
+	 * @see StringUtil#formatar(java.util.ResourceBundle, String, Object...)
 	 */
 	String masculino() default "";
 	
 	/**
 	 * Nome masculino no plural.
-	 * @see StringUtil#formatarMensagem(java.util.ResourceBundle, String, Object...)
+	 * @see StringUtil#formatar(java.util.ResourceBundle, String, Object...)
 	 */
 	String masculinoPlural() default "";
 	
 	/**
 	 * Nome feminino no singular.
-	 * @see StringUtil#formatarMensagem(java.util.ResourceBundle, String, Object...)
+	 * @see StringUtil#formatar(java.util.ResourceBundle, String, Object...)
 	 */
 	String feminino() default "";
 	
 	/**
 	 * Nome feminino no plural.
-	 * @see StringUtil#formatarMensagem(java.util.ResourceBundle, String, Object...)
+	 * @see StringUtil#formatar(java.util.ResourceBundle, String, Object...)
 	 */
 	String femininoPlural() default "";
 	

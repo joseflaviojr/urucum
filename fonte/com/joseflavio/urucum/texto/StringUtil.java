@@ -52,13 +52,13 @@ public class StringUtil {
 
 	/**
 	 * {@link MessageFormat Formata} uma mensagem textual, obtendo-a, se necessário e se possível, de uma {@link ResourceBundle fonte} sensível à {@link Locale}.
-	 * @param fonte {@link ResourceBundle} que contém as mensagens textuais chaveadas. Opcional.
+	 * @param fonte Fonte de mensagens traduzidas para uma {@link Locale}. Opcional.
 	 * @param mensagem Mensagem ou chave de mensagem desejada. Toda chave deve iniciar com "$" e será buscada na {@link ResourceBundle}.
-	 * @param parametros Parâmetros para {@link MessageFormat}. Podem iniciar com "$".
+	 * @param argumentos Argumentos para {@link MessageFormat#format(String, Object...)}. Podem iniciar com "$", caracterizando chaves.
 	 * @see MessageFormat
 	 * @see ResourceBundle
 	 */
-	public static String formatarMensagem( ResourceBundle fonte, String mensagem, Object... parametros ) throws MissingResourceException {
+	public static String formatarMensagem( ResourceBundle fonte, String mensagem, Object... argumentos ) throws MissingResourceException {
 		
 		if( mensagem == null ){
 			mensagem = "";
@@ -67,17 +67,21 @@ public class StringUtil {
 			else mensagem = mensagem.substring( 1 );
 		}
 		
-		if( parametros != null && parametros.length > 0 ){
+		if( argumentos != null && argumentos.length > 0 ){
 			
-			for( int i = 0; i < parametros.length; i++ ){
-				Object p = parametros[i];
-				if( p instanceof String && ((String)p).startsWith( "$" ) ){
-					if( fonte != null ) parametros[i] = fonte.getString( ((String)p).substring( 1 ) );
-					else parametros[i] = ((String)p).substring( 1 );
+			Object[] args = new Object[ argumentos.length ];
+			
+			for( int i = 0; i < argumentos.length; i++ ){
+				Object obj = argumentos[i];
+				if( obj instanceof String && ((String)obj).startsWith( "$" ) ){
+					if( fonte != null ) args[i] = fonte.getString( ((String)obj).substring( 1 ) );
+					else args[i] = ((String)obj).substring( 1 );
+				}else{
+					args[i] = argumentos[i];
 				}
 			}
 			
-			return new MessageFormat( mensagem ).format( parametros );
+			return MessageFormat.format( mensagem, args );
 			
 		}else{
 			
@@ -85,6 +89,52 @@ public class StringUtil {
 			
 		}
 		
+	}
+	
+	/**
+	 * {@link MessageFormat Formata} uma mensagem de acordo com uma {@link ResourceBundle}.
+	 * @param fonte Fonte de mensagens traduzidas para uma {@link Locale}. Opcional.
+	 * @param mensagem Chave da mensagem a ser buscada na {@link ResourceBundle}, conforme {@link #getMensagem(ResourceBundle, String)}.
+	 * @param argumentos Argumentos para {@link MessageFormat#format(String, Object...)}. {@link String}s serão buscadas na {@link ResourceBundle}, conforme {@link #getMensagem(ResourceBundle, String)}.
+	 * @see MessageFormat
+	 * @see ResourceBundle
+	 */
+	public static String formatar( ResourceBundle fonte, String mensagem, Object... argumentos ) {
+		
+		mensagem = mensagem != null ? getMensagem( fonte, mensagem ) : "";
+		
+		if( argumentos != null && argumentos.length > 0 ){
+			
+			Object[] args = new Object[ argumentos.length ];
+			
+			for( int i = 0; i < argumentos.length; i++ ){
+				Object obj = argumentos[i];
+				args[i] = obj instanceof String ? getMensagem( fonte, (String) obj ) : obj;
+			}
+			
+			return MessageFormat.format( mensagem, args );
+			
+		}else{
+			
+			return mensagem;
+			
+		}
+		
+	}
+	
+	/**
+	 * Obtém uma mensagem de uma {@link ResourceBundle}.
+	 * @param fonte Fonte de mensagens traduzidas para uma {@link Locale}. Opcional.
+	 * @param chave Chave da mensagem desejada. O primeiro {@link String#charAt(int) caractere} da chave será desconsiderado se ele for igual a '$'.
+	 * @return o valor original da chave, caso a mensagem não seja encontrada.
+	 */
+	public static String getMensagem( ResourceBundle fonte, String chave ) {
+		try{
+			String k = chave != null && chave.length() > 0 && chave.charAt( 0 ) == '$' ? chave.substring( 1 ) : chave;
+			return fonte != null ? fonte.getString( k ) : chave;
+		}catch( Exception e ){
+			return chave;
+		}
 	}
 	
 	/**

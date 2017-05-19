@@ -39,28 +39,20 @@
 
 package com.joseflavio.urucum.validacao;
 
-import java.io.File;
-import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Set;
-
 import com.joseflavio.urucum.aparencia.Nome;
 import com.joseflavio.urucum.array.ArrayUtil;
 import com.joseflavio.urucum.comunicacao.Mensagem;
 import com.joseflavio.urucum.comunicacao.Mensagem.Tipo;
 import com.joseflavio.urucum.javabeans.JavaBeansUtil;
 import com.joseflavio.urucum.texto.StringUtil;
+
+import java.io.File;
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
 
 /**
  * Utilitários relacionados à {@link Validacao}.
@@ -186,7 +178,7 @@ public class ValidacaoUtil {
 			if( valNaoNulo != null && valNaoNulo.criticidade() != Criticidade.IRRELEVANTE ) {
 				if( valor == null ){
 					objetoValido = false;
-					String mensagem = StringUtil.formatarMensagem(
+					String mensagem = StringUtil.formatar(
 						fonte,
 						valNaoNulo.mensagem(),
 						nome,
@@ -200,7 +192,7 @@ public class ValidacaoUtil {
 			if( valNaoVazio != null && valNaoVazio.criticidade() != Criticidade.IRRELEVANTE && valor != null ) {
 				if( valor.toString().isEmpty() ){
 					objetoValido = false;
-					String mensagem = StringUtil.formatarMensagem(
+					String mensagem = StringUtil.formatar(
 						fonte,
 						valNaoVazio.mensagem(),
 						nome,
@@ -224,7 +216,7 @@ public class ValidacaoUtil {
 				else tamanho = valor.toString().length();
 				if( tamanho < tamanhoMin || tamanho > tamanhoMax ){
 					objetoValido = false;
-					String mensagem = StringUtil.formatarMensagem(
+					String mensagem = StringUtil.formatar(
 						fonte,
 						valTamanho.mensagem(),
 						nome,
@@ -246,7 +238,7 @@ public class ValidacaoUtil {
 				else num = Double.parseDouble( valor.toString() );
 				if( num < numMin || num > numMax ){
 					objetoValido = false;
-					String mensagem = StringUtil.formatarMensagem(
+					String mensagem = StringUtil.formatar(
 						fonte,
 						valLimNum.mensagem(),
 						nome,
@@ -265,7 +257,7 @@ public class ValidacaoUtil {
 				String padrao = valFormato.padrao();
 				if( ! texto.isEmpty() && ! texto.matches( padrao ) ){
 					objetoValido = false;
-					String mensagem = StringUtil.formatarMensagem(
+					String mensagem = StringUtil.formatar(
 						fonte,
 						valFormato.mensagem(),
 						nome,
@@ -285,7 +277,7 @@ public class ValidacaoUtil {
 				msgArgs.clear();
 				if( ! validador.validar( valor, classe, id, objeto, args, msgArgs ) ){
 					objetoValido = false;
-					String mensagem = StringUtil.formatarMensagem(
+					String mensagem = StringUtil.formatar(
 						fonte,
 						valValidacao.mensagem(),
 						nome,
