@@ -117,6 +117,16 @@ public class JSON extends JSONObject implements Serializable {
 		super( baseName, locale );
 	}
 	
+	/**
+	 * {@link JSON} com as mesmas chaves e valores contidos no {@link JSONObject} indicado.<br>
+	 * É feita uma inclusão direta, sem realizar {@link Object#clone() clone} ou transformação.
+	 */
+	public JSON( JSONObject json ) {
+		for( String k : json.keySet() ){
+			super.put( k, json.get( k ) );
+		}
+	}
+	
 	@Override
 	public JSON accumulate( String key, Object value ) throws JSONException {
 		return (JSON) super.accumulate( key, value );
@@ -175,6 +185,21 @@ public class JSON extends JSONObject implements Serializable {
 	@Override
 	public JSON putOpt( String key, Object value ) throws JSONException {
 		return (JSON) super.putOpt( key, value );
+	}
+	
+	/**
+	 * Converte {@link #getJSONObject(String)} para {@link JSON}.
+	 */
+	public JSON getJSON( String key ) throws JSONException {
+		return new JSON( super.getJSONObject( key ) );
+	}
+	
+	/**
+	 * Converte {@link #optJSONObject(String)} para {@link JSON}.
+	 */
+	public JSON optJSON( String key ) {
+		JSONObject o = super.optJSONObject( key );
+		return o != null ? new JSON( o ) : null;
 	}
 	
 }

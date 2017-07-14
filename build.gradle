@@ -55,8 +55,8 @@ repositories {
 
 dependencies {
     compile fileTree(dir:"biblioteca", include:["*.jar"])
-    compile "org.json:json:20160810"
-    compile "com.fasterxml.jackson.core:jackson-databind:2.8.7"
+    compile "org.json:json:20170516"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.8.9"
     testCompile "junit:junit:4.12"
 }
 
