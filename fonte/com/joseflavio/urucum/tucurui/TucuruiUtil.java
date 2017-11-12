@@ -39,11 +39,18 @@
 
 package com.joseflavio.urucum.tucurui;
 
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  * Utilitários para {@link Tucurui}.
@@ -144,17 +151,16 @@ public class TucuruiUtil {
                 char ch = linha.charAt( 0 );
                 
                 if( ch == '#' ){
-                    if( ! obterVersao ) throw new TucuruiException( TucuruiException.Erro.CABECALHO_INVALIDO, nlinha );
+                    if( ! obterVersao ) throw novaTucuruiException( TucuruiException.Erro.CABECALHO_INVALIDO, nlinha );
                     String[] p = linha.split( " " );
-                    if( p.length != 3 ) throw new TucuruiException( TucuruiException.Erro.CABECALHO_INVALIDO, nlinha );
+                    if( p.length != 3 ) throw novaTucuruiException( TucuruiException.Erro.CABECALHO_INVALIDO, nlinha );
                     tucurui.setVersao( p[1] );
-                    tucurui.setCodificacao( p[2] );
                     obterVersao = false;
                     continue;
         
                 }else if( ch == '@' ){
-                    if( ! obterModelo ) throw new TucuruiException( TucuruiException.Erro.CABECALHO_INVALIDO, nlinha );
-                    if( tamanho < 3 ) throw new TucuruiException( TucuruiException.Erro.CABECALHO_INVALIDO, nlinha );
+                    if( ! obterModelo ) throw novaTucuruiException( TucuruiException.Erro.CABECALHO_INVALIDO, nlinha );
+                    if( tamanho < 3 ) throw novaTucuruiException( TucuruiException.Erro.CABECALHO_INVALIDO, nlinha );
                     tucurui.setModelo( linha.substring( 2 ) );
                     obterModelo = false;
                     continue;
@@ -183,7 +189,7 @@ public class TucuruiUtil {
             tamanho = linha.length();
             if( tamanho == 0 ) continue;
             
-            if( ( esp % 4 ) != 0 ) throw new TucuruiException( TucuruiException.Erro.INDENTACAO_INCORRETA, nlinha );
+            if( ( esp % 4 ) != 0 ) throw novaTucuruiException( TucuruiException.Erro.INDENTACAO_INCORRETA, nlinha );
     
             int nivel = esp / 4 + tab;
             while( nivel <= getNivel( mae ) ) mae = mae.getMae();
@@ -193,8 +199,6 @@ public class TucuruiUtil {
             if( linha.startsWith( "//" ) ){ //Comentário
                 
                 Comentario comentario = new Comentario( linha.substring( 2 ) );
-                comentario.setLinha( nlinha );
-                comentario.setNivel( nivel );
                 
                 mae.add( comentario );
                 mae = comentario;
@@ -210,18 +214,19 @@ public class TucuruiUtil {
                     
                     if( ! linha.isEmpty() ){
                         
-                        if( linha.length() < ( esp + tab ) ) throw new TucuruiException( TucuruiException.Erro.INDENTACAO_INCORRETA, nlinha );
-                        if( linha.substring( 0, esp + tab ).trim().length() != 0 ) throw new TucuruiException( TucuruiException.Erro.INDENTACAO_INCORRETA, nlinha );
+                        if( linha.length() < ( esp + tab ) ) throw novaTucuruiException( TucuruiException.Erro.INDENTACAO_INCORRETA, nlinha );
+                        if( linha.substring( 0, esp + tab ).trim().length() != 0 ) throw novaTucuruiException( TucuruiException.Erro.INDENTACAO_INCORRETA, nlinha );
                         
                         linha = linha.substring( esp + tab );
     
                         if( linha.equals( "---" ) ){ //Fechamento
                             
                             if( valor == null ){
-                                valor = new Valor( "", true );
-                                valor.setLinha( nlinha - 1 );
-                                valor.setNivel( nivel );
+                                valor = new Valor();
                                 mae.add( valor );
+                            }else{
+                                String texto = valor.getTexto();
+                                valor.setTexto( texto.substring( 0, texto.length() - 3 ) );
                             }
                             
                             mae = valor;
@@ -232,25 +237,19 @@ public class TucuruiUtil {
                         
                     }
                     
-                    if( valor != null ) valor.setTexto( valor.getTexto() + "{n}" );
-                    
-                    valor = new Valor( linha, true );
-                    valor.setLinha( nlinha );
-                    valor.setNivel( nivel );
+                    valor = new Valor( linha + "{n}" );
                     mae.add( valor );
                     
                 }
                 
-                if( valor != null ) throw new TucuruiException( TucuruiException.Erro.VALOR_LIVRE_NAO_FECHADO, nlinha );
+                if( valor != null ) throw novaTucuruiException( TucuruiException.Erro.VALOR_LIVRE_NAO_FECHADO, nlinha );
                 
                 
             }else if( linha.charAt( 0 ) == ':' ){ //Objeto anônimo (valor não livre)
     
-                if( tamanho == 1 || linha.charAt( 1 ) != ' ' ) throw new TucuruiException( TucuruiException.Erro.ESPACO_ESPERADO, nlinha );
+                if( tamanho == 1 || linha.charAt( 1 ) != ' ' ) throw novaTucuruiException( TucuruiException.Erro.ESPACO_ESPERADO, nlinha );
                 
                 Valor valor = new Valor( linha.substring( 2 ) );
-                valor.setLinha( nlinha );
-                valor.setNivel( nivel );
 
                 mae.add( valor );
                 mae = valor;
@@ -265,7 +264,7 @@ public class TucuruiUtil {
                 if( separador != -1 ){
                     nome = linha.substring( 0, separador );
                     if( separador < ( tamanho - 1 ) ){
-                        if( linha.charAt( separador + 1 ) != ' ' ) throw new TucuruiException( TucuruiException.Erro.ESPACO_ESPERADO, nlinha );
+                        if( linha.charAt( separador + 1 ) != ' ' ) throw novaTucuruiException( TucuruiException.Erro.ESPACO_ESPERADO, nlinha );
                         valor = linha.substring( separador + 2 );
                     }
                 }else{
@@ -275,16 +274,14 @@ public class TucuruiUtil {
                 boolean privado = nome.charAt( 0 ) == '-';
                 
                 if( privado ){
-                    if( nome.length() == 1 ) throw new TucuruiException( TucuruiException.Erro.NOME_INVALIDO, nlinha );
+                    if( nome.length() == 1 ) throw novaTucuruiException( TucuruiException.Erro.NOME_INVALIDO, nlinha );
                     nome = nome.substring( 1 );
                 }
                 
                 Objeto objeto = new Objeto( nome, privado );
-                objeto.setLinha( nlinha );
-                objeto.setNivel( nivel );
                 
                 if( valor != null ){
-                    objeto.add( new Valor( valor ).setLinha( nlinha ).setNivel( nivel + 1 ) );
+                    objeto.add( new Valor( valor ) );
                 }
     
                 mae.add( objeto );
@@ -299,53 +296,113 @@ public class TucuruiUtil {
     }
     
     /**
-     * {@link Transformer#transform(Source, Result) Transforma} um documento {@link Tucurui} em texto (XML, HTML, etc.) conforme um {@link Transformer}.
+     * Converte um documento XML em {@link Tucurui}.
+     */
+    public static Tucurui converterXML( File arquivo ) throws IOException, SAXException {
+        return converterXML0( arquivo );
+    }
+    
+    /**
+     * Converte um documento XML em {@link Tucurui}.
+     */
+    public static Tucurui converterXML( URL url ) throws IOException, SAXException {
+        return converterXML0( url.toExternalForm() );
+    }
+    
+    /**
+     * Converte um documento XML em {@link Tucurui}.
+     */
+    public static Tucurui converterXML( InputStream is ) throws IOException, SAXException {
+        return converterXML0( is );
+    }
+    
+    /**
+     * Converte um documento XML em {@link Tucurui}.
+     */
+    private static Tucurui converterXML0( Object arquivo ) throws IOException, SAXException {
+        
+        try{
+            
+            ConversorXMLTucurui conversor = new ConversorXMLTucurui();
+            
+            SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
+            XMLReader xmlReader = saxParser.getXMLReader();
+            xmlReader.setProperty( "http://xml.org/sax/properties/lexical-handler", conversor );
+            
+            if     ( arquivo instanceof File        ) saxParser.parse( (File)        arquivo, conversor );
+            else if( arquivo instanceof String      ) saxParser.parse( (String)      arquivo, conversor );
+            else if( arquivo instanceof InputStream ) saxParser.parse( (InputStream) arquivo, conversor );
+            
+            return conversor.getTucurui();
+            
+        }catch( ParserConfigurationException e ){
+            throw new SAXException( e );
+        }
+        
+    }
+    
+    /**
+     * {@link Transformer#transform(Source, Result) Transforma} um documento {@link Tucurui} em XML, conforme um {@link Transformer}.
      * @param tucurui {@link Tucurui} a ser transformado.
      * @param transformador {@link Transformer}.
-     * @param saida Destino do resultado da transformação.
-     * @see #gerarXML(Tucurui, Writer)
-     * @see #gerarHTML(Tucurui, Writer)
+     * @param destino Destino do resultado da transformação.
+     * @param codificacao {@link Charset}.
+     * @see #gerarXML(Tucurui, OutputStream, String)
+     * @see #gerarHTML(Tucurui, OutputStream, String)
      * @see Tucurui#gerarDOM()
      */
-    public static void transformar( Tucurui tucurui, Transformer transformador, Writer saida ) throws TucuruiException, TransformerException {
-        transformador.transform( new DOMSource( tucurui.gerarDOM() ), new StreamResult( saida ) );
+    public static void transformar( Tucurui tucurui, Transformer transformador, OutputStream destino, String codificacao ) throws TucuruiException, TransformerException {
+        try{
+            transformador.transform( new DOMSource( tucurui.gerarDOM() ), new StreamResult( new OutputStreamWriter( destino, codificacao ) ) );
+        }catch( UnsupportedEncodingException e ){
+            throw new TransformerException( e );
+        }
     }
     
     /**
      * Transforma um documento {@link Tucurui} em XML.
      * @param tucurui {@link Tucurui} a ser transformado.
-     * @param saida Destino do resultado da transformação.
-     * @see #transformar(Tucurui, Transformer, Writer)
+     * @param destino Destino do resultado da transformação.
+     * @param codificacao {@link Charset}.
+     * @see #transformar(Tucurui, Transformer, OutputStream, String)
      */
-    public static void gerarXML( Tucurui tucurui, Writer saida ) throws TucuruiException, TransformerException {
+    public static void gerarXML( Tucurui tucurui, OutputStream destino, String codificacao ) throws TucuruiException, TransformerException {
     
         Transformer transformador = TransformerFactory.newInstance().newTransformer();
         
         transformador.setOutputProperty( OutputKeys.METHOD, "xml" );
         transformador.setOutputProperty( OutputKeys.OMIT_XML_DECLARATION, "no" );
-        transformador.setOutputProperty( OutputKeys.ENCODING, tucurui.getCodificacao() );
+        transformador.setOutputProperty( OutputKeys.ENCODING, codificacao );
         transformador.setOutputProperty( OutputKeys.INDENT, "yes" );
         
-        transformar( tucurui, transformador, saida );
+        transformar( tucurui, transformador, destino, codificacao );
         
     }
     
     /**
      * Transforma um documento {@link Tucurui} em HTML.
      * @param tucurui {@link Tucurui} a ser transformado.
-     * @param saida Destino do resultado da transformação.
-     * @see #transformar(Tucurui, Transformer, Writer)
+     * @param destino Destino do resultado da transformação.
+     * @param codificacao {@link Charset}.
+     * @see #transformar(Tucurui, Transformer, OutputStream, String)
      */
-    public static void gerarHTML( Tucurui tucurui, Writer saida ) throws TucuruiException, TransformerException {
+    public static void gerarHTML( Tucurui tucurui, OutputStream destino, String codificacao ) throws TucuruiException, TransformerException {
         
         Transformer transformador = TransformerFactory.newInstance().newTransformer();
         
         transformador.setOutputProperty( OutputKeys.METHOD, "html" );
-        transformador.setOutputProperty( OutputKeys.ENCODING, tucurui.getCodificacao() );
+        transformador.setOutputProperty( OutputKeys.ENCODING, codificacao );
         transformador.setOutputProperty( OutputKeys.INDENT, "yes" );
     
-        transformar( tucurui, transformador, saida );
+        transformar( tucurui, transformador, destino, codificacao );
         
+    }
+    
+    /**
+     * {@link TucuruiImpressora#imprimir(Tucurui, OutputStream) Imprime} um documento {@link Tucurui} de acordo com a {@link PadraoImpressora}.
+     */
+    public static void imprimir( Tucurui tucurui, OutputStream saida ) throws IOException, TucuruiException {
+        new PadraoImpressora().imprimir( tucurui, saida );
     }
     
     /**
@@ -454,6 +511,10 @@ public class TucuruiUtil {
     
     private static int getNivel( Hierarquia hierarquia ) {
         return hierarquia instanceof Elemento ? ((Elemento)hierarquia).getNivel() : -1;
+    }
+    
+    private static TucuruiException novaTucuruiException( TucuruiException.Erro erro, int linha ) {
+        return new TucuruiException( erro, null, erro.toString() + " (linha " + linha + ")" );
     }
     
 }

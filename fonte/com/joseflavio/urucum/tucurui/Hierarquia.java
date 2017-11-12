@@ -339,4 +339,32 @@ public abstract class Hierarquia implements List<Elemento> {
 		throw new UnsupportedOperationException();
 	}
 	
+	/**
+	 * Posição desta na {@link Hierarquia} da sua {@link #getMae() mãe}. Valor >= 1.
+	 * @return {@link #getMae()}.{@link #indexOf(Object) indexOf(this)}+1
+	 */
+	public int getPosicao() {
+		return mae != null ? mae.indexOf( this ) + 1 : 1;
+	}
+	
+	/**
+	 * Pseudoendereço desta {@link Hierarquia} dentro do seu documento {@link Tucurui}.<br>
+	 * Inclui {@link #getPosicao()} e {@link #toString()} parcial.
+	 */
+	public String getEndereco() {
+		
+		StringBuilder endereco = new StringBuilder();
+		Hierarquia h = this;
+		
+		while( h != null && !( h instanceof Tucurui ) ){
+			String descricao = h.toString();
+			if( descricao.length() > 15 ) descricao = descricao.substring( 0, 12 ) + "...";
+			endereco.insert( 0, "/[" + h.getPosicao() + "]" + descricao );
+			h = h.mae;
+		}
+		
+		return endereco.length() > 0 ? endereco.toString() : "/";
+		
+	}
+	
 }

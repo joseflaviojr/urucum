@@ -45,35 +45,23 @@ package com.joseflavio.urucum.tucurui;
  * @see <a href="http://joseflavio.com/tucurui">http://joseflavio.com/tucurui</a>
  */
 public abstract class Elemento extends Hierarquia {
-	
-	private int nivel = 0;
-	
-	private int linha = 1;
-	
-	/**
-	 * Nível hierárquico do {@link Elemento}, isto é, tamanho da indentação (quantidade de tabulações).
-	 */
-	public int getNivel() {
-		return nivel;
-	}
-	
-	public Elemento setNivel( int nivel ) {
-		if( nivel < 0 ) throw new IllegalArgumentException();
-		this.nivel = nivel;
-		return this;
-	}
-	
-	/**
-	 * Número da linha na qual o {@link Elemento} foi declarado no documento {@link Tucurui}, a partir de 1.
-	 */
-	public int getLinha() {
-		return linha;
-	}
-	
-	public Elemento setLinha( int linha ) {
-		if( linha <= 0 ) throw new IllegalArgumentException();
-		this.linha = linha;
-		return this;
-	}
-	
+    
+    /**
+     * Nível hierárquico do {@link Elemento}, isto é, tamanho da indentação (quantidade de tabulações).
+     */
+    public int getNivel() {
+    
+        int nivel = 0;
+        Hierarquia mae = this;
+        
+        while( true ){
+            mae = mae.getMae();
+            if( mae == null || mae instanceof Tucurui ) break;
+            else nivel++;
+        }
+        
+        return nivel;
+        
+    }
+    
 }

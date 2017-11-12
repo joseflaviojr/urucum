@@ -39,64 +39,29 @@
 
 package com.joseflavio.urucum.tucurui;
 
-/**
- * {@link Elemento} textual.
- * @author José Flávio de Souza Dias Júnior
- * @see <a href="http://joseflavio.com/tucurui">http://joseflavio.com/tucurui</a>
- */
-public abstract class Texto extends Elemento {
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 
-	private String texto;
-	
-	private transient String reconhecido;
-	
-	public Texto() {
-		this( "" );
-	}
-	
-	public Texto( String texto ) {
-		setTexto( texto );
-	}
+/**
+ * Impressora de {@link Tucurui}, ou seja, gerador de representação textual de {@link Tucurui}.
+ * @author José Flávio de Souza Dias Júnior
+ */
+public abstract class TucuruiImpressora {
 	
 	/**
-     * Conteúdo textual.<br>
-	 * Observação: os codificadores de caracteres Unicode e os codificadores especiais
-	 * não serão traduzidos para {@link Character}. Para tanto, utilizar {@link #getTextoReconhecido()}.
-	 * @see #getTextoReconhecido()
-	 * @see TucuruiUtil#reconhecer(String)
-     */
-	public String getTexto() {
-		return texto;
-	}
-	
-	public Texto setTexto( String texto ) {
-		if( texto == null ) throw new IllegalArgumentException();
-		this.texto = texto.replace( "\n", "{n}" ).replace( "\t", "{t}" );
-		this.reconhecido = null;
-		return this;
-	}
-	
-	/**
-	 * Retorna o {@link #getTexto() texto} {@link TucuruiUtil#reconhecer(String) reconhecido}.
-	 * @see TucuruiUtil#reconhecer(String)
+	 * Imprime o documento {@link Tucurui}.
+	 * @param tucurui {@link Tucurui} a ser impresso.
+	 * @param saida Destino da representação textual.
+	 * @param codificacao {@link Charset}
 	 */
-	public String getTextoReconhecido() {
-		if( reconhecido == null ){
-			reconhecido = TucuruiUtil.reconhecer( texto );
-		}
-		return reconhecido;
-	}
-	
-	@Override
-	public String toString() {
-		return texto;
-	}
+	public abstract void imprimir( Tucurui tucurui, OutputStream saida, String codificacao ) throws IOException, TucuruiException;
 	
 	/**
-	 * O mesmo que {@link #getTextoReconhecido()}.
+	 * {@link #imprimir(Tucurui, OutputStream, String)} com {@link Charset} "UTF-8".
 	 */
-	public String texto() {
-		return getTextoReconhecido();
+	public final void imprimir( Tucurui tucurui, OutputStream saida ) throws IOException, TucuruiException {
+		imprimir( tucurui, saida, "UTF-8" );
 	}
 	
 }

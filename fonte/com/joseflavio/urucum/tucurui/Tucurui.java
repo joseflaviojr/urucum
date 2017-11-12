@@ -39,14 +39,17 @@
 
 package com.joseflavio.urucum.tucurui;
 
+import com.joseflavio.urucum.texto.StringUtil;
 import org.w3c.dom.*;
+import org.w3c.dom.CharacterData;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Documento Tucuruí.
@@ -57,17 +60,14 @@ public class Tucurui extends Hierarquia {
     
     private String versao;
     
-    private String codificacao;
-    
     private String modelo;
     
     public Tucurui() {
-        this( "1.0", "UTF-8", null );
+        this( "1.0", null );
     }
     
-    public Tucurui( String versao, String codificacao, String modelo ) {
+    public Tucurui( String versao, String modelo ) {
         setVersao( versao );
-        setCodificacao( codificacao );
         setModelo( modelo );
     }
     
@@ -76,16 +76,7 @@ public class Tucurui extends Hierarquia {
     }
     
     public Tucurui setVersao( String versao ) {
-        this.versao = versao == null ? "1.0" : versao;
-        return this;
-    }
-    
-    public String getCodificacao() {
-        return codificacao;
-    }
-    
-    public Tucurui setCodificacao( String codificacao ) {
-        this.codificacao = codificacao == null ? "UTF-8" : codificacao;
+        this.versao = StringUtil.tamanho( versao ) == 0 ? "1.0" : versao;
         return this;
     }
     
@@ -98,10 +89,21 @@ public class Tucurui extends Hierarquia {
         return this;
     }
     
+    @Override
+    public String toString() {
+        try{
+            ByteArrayOutputStream saida = new ByteArrayOutputStream( 512 );
+            TucuruiUtil.imprimir( this, saida );
+            return new String( saida.toByteArray(), "UTF-8" );
+        }catch( Exception e ){
+            throw new IllegalStateException( e );
+        }
+    }
+    
     /**
      * Gera um {@link Document Documento} XML (DOM) correspondente a este {@link Tucurui}.
      * @throws TucuruiException Semântica inconsistente.
-     * @see TucuruiUtil#transformar(Tucurui, Transformer, Writer)
+     * @see TucuruiUtil#transformar(Tucurui, Transformer, OutputStream, String)
      */
     public Document gerarDOM() throws TucuruiException {
     
@@ -113,7 +115,7 @@ public class Tucurui extends Hierarquia {
                 try{
                     xml.appendChild( gerarNode( elemento, xml ) );
                 }catch( DOMException e ){
-                    throw new TucuruiException( TucuruiException.Erro.SEMANTICA_INCORRETA, elemento.getLinha(), e );
+                    throw new TucuruiException( TucuruiException.Erro.SEMANTICA_INCORRETA, elemento.getEndereco(), e );
                 }
             }
         
@@ -127,22 +129,30 @@ public class Tucurui extends Hierarquia {
     
     /**
      * Transforma este documento {@link Tucurui} em XML.
-     * @see TucuruiUtil#gerarXML(Tucurui, Writer)
+     * @see TucuruiUtil#gerarXML(Tucurui, OutputStream, String)
      */
     public String gerarXML() throws TucuruiException, TransformerException {
-        StringWriter saida = new StringWriter( 512 );
-        TucuruiUtil.gerarXML( this, saida );
-        return saida.toString();
+        try{
+            ByteArrayOutputStream destino = new ByteArrayOutputStream( 512 );
+            TucuruiUtil.gerarXML( this, destino, "UTF-8" );
+            return new String( destino.toByteArray(), "UTF-8" );
+        }catch( UnsupportedEncodingException e ){
+            throw new TransformerException( e );
+        }
     }
     
     /**
      * Transforma este documento {@link Tucurui} em HTML.
-     * @see TucuruiUtil#gerarHTML(Tucurui, Writer)
+     * @see TucuruiUtil#gerarHTML(Tucurui, OutputStream, String)
      */
     public String gerarHTML() throws TucuruiException, TransformerException {
-        StringWriter saida = new StringWriter( 512 );
-        TucuruiUtil.gerarHTML( this, saida );
-        return saida.toString();
+        try{
+            ByteArrayOutputStream destino = new ByteArrayOutputStream( 512 );
+            TucuruiUtil.gerarHTML( this, destino, "UTF-8" );
+            return new String( destino.toByteArray(), "UTF-8" );
+        }catch( UnsupportedEncodingException e ){
+            throw new TransformerException( e );
+        }
     }
     
     private static Node gerarNode( Elemento elemento, Document xml ) throws TucuruiException {
@@ -162,21 +172,25 @@ public class Tucurui extends Hierarquia {
             }else if( elemento instanceof Comentario ){
                 node = xml.createComment( ((Comentario)elemento).getTextoReconhecido() );
             }
-        
+    
+            if( node instanceof CharacterData && elemento.size() > 0 ){
+                throw new TucuruiException( TucuruiException.Erro.SEMANTICA_INCORRETA, elemento.get( 0 ).getEndereco() );
+            }
+            
             for( Elemento sub : elemento ){
                 try{
                     Node subnode = gerarNode( sub, xml );
                     if( subnode instanceof Attr ) ((Element)node).setAttributeNode( (Attr) subnode );
                     else node.appendChild( subnode );
                 }catch( DOMException e ){
-                    throw new TucuruiException( TucuruiException.Erro.SEMANTICA_INCORRETA, sub.getLinha(), e );
+                    throw new TucuruiException( TucuruiException.Erro.SEMANTICA_INCORRETA, sub.getEndereco(), e );
                 }
             }
         
             return node;
             
         }catch( DOMException e ){
-            throw new TucuruiException( TucuruiException.Erro.SEMANTICA_INCORRETA, elemento.getLinha(), e );
+            throw new TucuruiException( TucuruiException.Erro.SEMANTICA_INCORRETA, elemento.getEndereco(), e );
         }
     
     }

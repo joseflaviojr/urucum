@@ -46,28 +46,12 @@ package com.joseflavio.urucum.tucurui;
  */
 public class Valor extends Texto {
 	
-	private boolean livre;
-	
 	public Valor() {
-		this( "", false );
+		this( "" );
 	}
 	
 	public Valor( String texto ) {
-		this( texto, false );
-	}
-	
-	public Valor( String texto, boolean livre ) {
 		super( texto );
-		this.livre = livre;
-	}
-	
-	public boolean isLivre() {
-		return livre;
-	}
-	
-	public Valor setLivre( boolean livre ) {
-		this.livre = livre;
-		return this;
 	}
 	
 }

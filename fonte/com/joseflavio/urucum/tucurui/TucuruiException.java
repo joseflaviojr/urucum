@@ -39,6 +39,8 @@
 
 package com.joseflavio.urucum.tucurui;
 
+import com.joseflavio.urucum.texto.StringUtil;
+
 /**
  * {@link Exception} de {@link Tucurui}.
  * @author José Flávio de Souza Dias Júnior
@@ -48,49 +50,76 @@ public class TucuruiException extends Exception {
 	
 	private Erro erro;
 	
-	private int linha;
+	private String endereco;
 	
-	public TucuruiException( Erro erro, int linha, String mensagem, Throwable causa ) {
-		super( mensagem, causa );
-		this.erro = erro;
-		this.linha = linha;
+	/**
+	 * @param erro {@link Erro}. {@code null} == {@link Erro#DESCONHECIDO}.
+	 * @param endereco {@link Hierarquia#getEndereco()} ou {@code null}.
+	 * @param mensagem {@link Exception#getMessage()} ou {@code null}.
+	 * @param causa {@link Exception#getCause()} ou {@code null}.
+	 */
+	public TucuruiException( Erro erro, String endereco, String mensagem, Throwable causa ) {
+		super( formatarMensagem( erro, endereco, mensagem, causa ), causa );
+		this.erro = erro != null ? erro : Erro.DESCONHECIDO;
+		this.endereco = endereco;
 	}
 	
-	public TucuruiException( Erro erro, int linha, String mensagem ) {
-		this( erro, linha, mensagem, null );
+	/**
+     * @param erro {@link Erro}. {@code null} == {@link Erro#DESCONHECIDO}.
+     * @param endereco {@link Hierarquia#getEndereco()} ou {@code null}.
+	 * @param mensagem {@link Exception#getMessage()} ou {@code null}.
+	 */
+	public TucuruiException( Erro erro, String endereco, String mensagem ) {
+		this( erro, endereco, mensagem, null );
 	}
 	
-	public TucuruiException( Erro erro, int linha, Throwable causa ) {
-		this( erro, linha, linha + ": " + erro.toString(), causa );
+	/**
+     * @param erro {@link Erro}. {@code null} == {@link Erro#DESCONHECIDO}.
+     * @param endereco {@link Hierarquia#getEndereco()} ou {@code null}.
+	 * @param causa {@link Exception#getCause()} ou {@code null}.
+	 */
+	public TucuruiException( Erro erro, String endereco, Throwable causa ) {
+		this( erro, endereco, null, causa );
 	}
 	
-	public TucuruiException( Erro erro, int linha ) {
-		this( erro, linha, (Throwable) null );
+	/**
+     * @param erro {@link Erro}. {@code null} == {@link Erro#DESCONHECIDO}.
+     * @param endereco {@link Hierarquia#getEndereco()} ou {@code null}.
+	 */
+	public TucuruiException( Erro erro, String endereco ) {
+		this( erro, endereco, (Throwable) null );
 	}
 	
+	/**
+	 * @param causa {@link Exception#getCause()} ou {@code null}.
+	 */
 	public TucuruiException( Throwable causa ) {
-		this( Erro.DESCONHECIDO, 0, causa );
+		this( Erro.DESCONHECIDO, null, causa );
 	}
 	
 	public TucuruiException() {
 		this( null );
 	}
-	
+    
+    /**
+     * {@link Erro}, jamais {@code null}.
+     */
 	public Erro getErro() {
 		return erro;
 	}
-	
-	public void setErro( Erro erro ) {
-		this.erro = erro;
+    
+    /**
+     * {@link Hierarquia#getEndereco()} ou {@code null}.
+     */
+	public String getEndereco() {
+		return endereco;
 	}
 	
-	public int getLinha() {
-		return linha;
-	}
-	
-	public void setLinha( int linha ) {
-		this.linha = linha;
-	}
+	private static String formatarMensagem( Erro erro, String endereco, String mensagem, Throwable causa ) {
+	    mensagem = erro.toString() + ( StringUtil.tamanho( mensagem ) > 0 ? ": " + mensagem : "" );
+        if( StringUtil.tamanho( endereco ) > 0 ) mensagem += " ("+ endereco + ")";
+        return mensagem;
+    }
 	
 	public enum Erro {
 		DESCONHECIDO,

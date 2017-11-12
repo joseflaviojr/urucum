@@ -47,7 +47,7 @@ package com.joseflavio.urucum.tucurui;
 public class Comentario extends Texto {
 	
 	public Comentario() {
-		super();
+		this( "" );
 	}
 	
 	public Comentario( String texto ) {
