@@ -138,7 +138,7 @@ uploadArchives {
         name nome
         packaging "jar"
         description descricao
-        url "http://www.joseflavio.com/urucum"
+        url "http://joseflavio.com/urucum"
 
         scm {
           connection "scm:git:ssh:git@github.com/joseflaviojr/urucum.git"
