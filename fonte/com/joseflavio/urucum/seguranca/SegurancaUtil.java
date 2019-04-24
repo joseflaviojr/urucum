@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 José Flávio de Souza Dias Júnior
+ *  Copyright (C) 2016-2019 José Flávio de Souza Dias Júnior
  *
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *
@@ -19,7 +19,7 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 José Flávio de Souza Dias Júnior
+ *  Direitos Autorais Reservados (C) 2016-2019 José Flávio de Souza Dias Júnior
  *
  *  Este arquivo é parte de Urucum - <http://joseflavio.com/urucum/>.
  *
