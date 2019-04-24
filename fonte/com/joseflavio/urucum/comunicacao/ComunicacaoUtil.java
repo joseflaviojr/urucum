@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Copyright (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *  
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *  
@@ -19,22 +19,22 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Direitos Autorais Reservados (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  * 
- *  Este arquivo È parte de Urucum - <http://joseflavio.com/urucum/>.
+ *  Este arquivo √© parte de Urucum - <http://joseflavio.com/urucum/>.
  * 
- *  Urucum È software livre: vocÍ pode redistribuÌ-lo e/ou modific·-lo
- *  sob os termos da LicenÁa P˙blica Menos Geral GNU conforme publicada pela
- *  Free Software Foundation, tanto a vers„o 3 da LicenÁa, como
- *  (a seu critÈrio) qualquer vers„o posterior.
+ *  Urucum √© software livre: voc√™ pode redistribu√≠-lo e/ou modific√°-lo
+ *  sob os termos da Licen√ßa P√∫blica Menos Geral GNU conforme publicada pela
+ *  Free Software Foundation, tanto a vers√£o 3 da Licen√ßa, como
+ *  (a seu crit√©rio) qualquer vers√£o posterior.
  * 
- *  Urucum È distribuÌdo na expectativa de que seja ˙til,
- *  porÈm, SEM NENHUMA GARANTIA; nem mesmo a garantia implÌcita de
- *  COMERCIABILIDADE ou ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a
- *  LicenÁa P˙blica Menos Geral do GNU para mais detalhes.
+ *  Urucum √© distribu√≠do na expectativa de que seja √∫til,
+ *  por√©m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de
+ *  COMERCIABILIDADE ou ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a
+ *  Licen√ßa P√∫blica Menos Geral do GNU para mais detalhes.
  * 
- *  VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Menos Geral do GNU
- *  junto com Urucum. Se n„o, veja <http://www.gnu.org/licenses/>.
+ *  Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Menos Geral do GNU
+ *  junto com Urucum. Se n√£o, veja <http://www.gnu.org/licenses/>.
  */
 
 package com.joseflavio.urucum.comunicacao;
@@ -55,16 +55,16 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
 /**
- * Utilit·rios para comunicaÁ„o de dados.
- * @author JosÈ Fl·vio de Souza Dias J˙nior
+ * Utilit√°rios para comunica√ß√£o de dados.
+ * @author Jos√© Fl√°vio de Souza Dias J√∫nior
  */
 public class ComunicacaoUtil {
 
     /**
-     * Abre um {@link KeyStore} atravÈs de {@link KeyStore#load(java.io.InputStream, char[])}.
-     * @param endereco Arquivo do {@link KeyStore}. Sendo null, ser· retornado um {@link KeyStore} vazio.
+     * Abre um {@link KeyStore} atrav√©s de {@link KeyStore#load(java.io.InputStream, char[])}.
+     * @param arquivo Arquivo do {@link KeyStore}. Sendo null, ser√° retornado um {@link KeyStore} vazio.
      * @param senha Senha para abrir o {@link KeyStore}. null == "".
-     * @param tipo Tipo do {@link KeyStore}. Padr„o: "jks". Veja {@link KeyStore#getInstance(String)}.
+     * @param tipo Tipo do {@link KeyStore}. Padr√£o: "jks". Veja {@link KeyStore#getInstance(String)}.
      */
     public static KeyStore abrirKeyStore( File arquivo, String senha, String tipo ) throws
         KeyStoreException, IOException,
@@ -87,7 +87,7 @@ public class ComunicacaoUtil {
 
     /**
      * {@link #abrirKeyStore(File, String, String)}
-     * com base nas especificaÁıes feitas atravÈs
+     * com base nas especifica√ß√µes feitas atrav√©s
      * das {@link System#setProperty(String, String) propriedades}
      * "javax.net.ssl.keyStore", "javax.net.ssl.keyStorePassword" e "javax.net.ssl.keyStoreType".
      */
@@ -109,7 +109,7 @@ public class ComunicacaoUtil {
 
     /**
      * {@link #abrirKeyStore(File, String, String)}
-     * com base nas especificaÁıes feitas atravÈs
+     * com base nas especifica√ß√µes feitas atrav√©s
      * das {@link System#setProperty(String, String) propriedades}
      * "javax.net.ssl.trustStore", "javax.net.ssl.trustStorePassword" e "javax.net.ssl.trustStoreType".
      */
@@ -131,7 +131,7 @@ public class ComunicacaoUtil {
 
     /**
      * {@link KeyManagerFactory#init(KeyStore, char[]) Inicializa}
-     * um {@link KeyManagerFactory} com base no {@link KeyStore} obtido atravÈs de {@link #abrirKeyStore()}.
+     * um {@link KeyManagerFactory} com base no {@link KeyStore} obtido atrav√©s de {@link #abrirKeyStore()}.
      */
     public static KeyManagerFactory iniciarKeyManagerFactory() throws
         KeyStoreException, IOException,
@@ -150,7 +150,7 @@ public class ComunicacaoUtil {
 
     /**
      * {@link TrustManagerFactory#init(KeyStore) Inicializa}
-     * um {@link TrustManagerFactory} com base no {@link KeyStore} obtido atravÈs de {@link #abrirTrustStore()}.
+     * um {@link TrustManagerFactory} com base no {@link KeyStore} obtido atrav√©s de {@link #abrirTrustStore()}.
      */
     public static TrustManagerFactory iniciarTrustManagerFactory() throws
         KeyStoreException, IOException,
@@ -166,7 +166,7 @@ public class ComunicacaoUtil {
     /**
      * {@link SSLContext#init(javax.net.ssl.KeyManager[], javax.net.ssl.TrustManager[], SecureRandom) Inicializa}
      * um {@link SSLContext} com base em {@link #iniciarKeyManagerFactory()} e {@link #iniciarTrustManagerFactory()}.
-     * @return {@link SSLContext} para comunicaÁ„o atravÈs do protocolo SSL/TLS.
+     * @return {@link SSLContext} para comunica√ß√£o atrav√©s do protocolo SSL/TLS.
      */
     public static SSLContext iniciarSSLContext() throws
         KeyStoreException, IOException,

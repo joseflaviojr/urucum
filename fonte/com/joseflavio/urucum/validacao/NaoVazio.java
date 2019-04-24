@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Copyright (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *  
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *  
@@ -19,22 +19,22 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Direitos Autorais Reservados (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  * 
- *  Este arquivo È parte de Urucum - <http://joseflavio.com/urucum/>.
+ *  Este arquivo √© parte de Urucum - <http://joseflavio.com/urucum/>.
  * 
- *  Urucum È software livre: vocÍ pode redistribuÌ-lo e/ou modific·-lo
- *  sob os termos da LicenÁa P˙blica Menos Geral GNU conforme publicada pela
- *  Free Software Foundation, tanto a vers„o 3 da LicenÁa, como
- *  (a seu critÈrio) qualquer vers„o posterior.
+ *  Urucum √© software livre: voc√™ pode redistribu√≠-lo e/ou modific√°-lo
+ *  sob os termos da Licen√ßa P√∫blica Menos Geral GNU conforme publicada pela
+ *  Free Software Foundation, tanto a vers√£o 3 da Licen√ßa, como
+ *  (a seu crit√©rio) qualquer vers√£o posterior.
  * 
- *  Urucum È distribuÌdo na expectativa de que seja ˙til,
- *  porÈm, SEM NENHUMA GARANTIA; nem mesmo a garantia implÌcita de
- *  COMERCIABILIDADE ou ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a
- *  LicenÁa P˙blica Menos Geral do GNU para mais detalhes.
+ *  Urucum √© distribu√≠do na expectativa de que seja √∫til,
+ *  por√©m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de
+ *  COMERCIABILIDADE ou ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a
+ *  Licen√ßa P√∫blica Menos Geral do GNU para mais detalhes.
  * 
- *  VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Menos Geral do GNU
- *  junto com Urucum. Se n„o, veja <http://www.gnu.org/licenses/>.
+ *  Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Menos Geral do GNU
+ *  junto com Urucum. Se n√£o, veja <http://www.gnu.org/licenses/>.
  */
 
 package com.joseflavio.urucum.validacao;
@@ -48,8 +48,8 @@ import com.joseflavio.urucum.aparencia.Nome;
 import com.joseflavio.urucum.texto.StringUtil;
 
 /**
- * N„o {@link String#isEmpty()}, podendo ser <code>null</code>.
- * @author JosÈ Fl·vio de Souza Dias J˙nior
+ * N√£o {@link String#isEmpty()}, podendo ser <code>null</code>.
+ * @author Jos√© Fl√°vio de Souza Dias J√∫nior
  */
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
@@ -59,11 +59,11 @@ public @interface NaoVazio {
 	
 	/**
 	 * Mensagem de erro, conforme {@link StringUtil#formatar(java.util.ResourceBundle, String, Object...)}.<br>
-	 * Par‚metros:
+	 * Par√¢metros:
 	 * <pre>
-	 * {0} = {@link String}  = {@link Nome} da vari·vel
-	 * {1} = {@link Integer} = gÍnero do nome: 0 (masculino) ou 1 (feminino)
-	 * {2} = {@link Integer} = n˙mero do nome: 0 (singular) ou 1 (plural)
+	 * {0} = {@link String}  = {@link Nome} da vari√°vel
+	 * {1} = {@link Integer} = g√™nero do nome: 0 (masculino) ou 1 (feminino)
+	 * {2} = {@link Integer} = n√∫mero do nome: 0 (singular) ou 1 (plural)
 	 * </pre>
 	 */
 	String mensagem() default "Erro_NaoVazio";

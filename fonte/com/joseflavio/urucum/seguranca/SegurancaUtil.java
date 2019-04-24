@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Copyright (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *
@@ -19,22 +19,22 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Direitos Autorais Reservados (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *
- *  Este arquivo È parte de Urucum - <http://joseflavio.com/urucum/>.
+ *  Este arquivo √© parte de Urucum - <http://joseflavio.com/urucum/>.
  *
- *  Urucum È software livre: vocÍ pode redistribuÌ-lo e/ou modific·-lo
- *  sob os termos da LicenÁa P˙blica Menos Geral GNU conforme publicada pela
- *  Free Software Foundation, tanto a vers„o 3 da LicenÁa, como
- *  (a seu critÈrio) qualquer vers„o posterior.
+ *  Urucum √© software livre: voc√™ pode redistribu√≠-lo e/ou modific√°-lo
+ *  sob os termos da Licen√ßa P√∫blica Menos Geral GNU conforme publicada pela
+ *  Free Software Foundation, tanto a vers√£o 3 da Licen√ßa, como
+ *  (a seu crit√©rio) qualquer vers√£o posterior.
  *
- *  Urucum È distribuÌdo na expectativa de que seja ˙til,
- *  porÈm, SEM NENHUMA GARANTIA; nem mesmo a garantia implÌcita de
- *  COMERCIABILIDADE ou ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a
- *  LicenÁa P˙blica Menos Geral do GNU para mais detalhes.
+ *  Urucum √© distribu√≠do na expectativa de que seja √∫til,
+ *  por√©m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de
+ *  COMERCIABILIDADE ou ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a
+ *  Licen√ßa P√∫blica Menos Geral do GNU para mais detalhes.
  *
- *  VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Menos Geral do GNU
- *  junto com Urucum. Se n„o, veja <http://www.gnu.org/licenses/>.
+ *  Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Menos Geral do GNU
+ *  junto com Urucum. Se n√£o, veja <http://www.gnu.org/licenses/>.
  */
 
 package com.joseflavio.urucum.seguranca;
@@ -53,13 +53,13 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
- * Utilit·rios de seguranÁa: criptografia e assinatura digital.
- * @author JosÈ Fl·vio de Souza Dias J˙nior
+ * Utilit√°rios de seguran√ßa: criptografia e assinatura digital.
+ * @author Jos√© Fl√°vio de Souza Dias J√∫nior
  */
 public class SegurancaUtil {
     
     /**
-     * Gera um par de chaves (p˙blica/privada) para criptografia assimÈtrica.
+     * Gera um par de chaves (p√∫blica/privada) para criptografia assim√©trica.
      * @param algoritmo Veja {@link KeyPairGenerator#getInstance(String)}
      * @param tamanho Veja {@link KeyPairGenerator#initialize(int)}
      */
@@ -78,7 +78,7 @@ public class SegurancaUtil {
     }
     
     /**
-     * Gera uma chave secreta para criptografia simÈtrica.
+     * Gera uma chave secreta para criptografia sim√©trica.
      * @param algoritmo Veja {@link KeyGenerator#getInstance(String)}
      * @param tamanho Veja {@link KeyGenerator#init(int)}
      */
@@ -97,7 +97,7 @@ public class SegurancaUtil {
     }
     
     /**
-     * Salva uma {@link Key chave} criptogr·fica num {@link File}.
+     * Salva uma {@link Key chave} criptogr√°fica num {@link File}.
      * @see Key#getEncoded()
      */
     public static void salvarChave( Key chave, File arquivo ) throws IOException {
@@ -107,8 +107,8 @@ public class SegurancaUtil {
     }
     
     /**
-     * ObtÈm uma {@link SecretKey} a partir de um {@link File}.
-     * @param arquivo Arquivo no qual a chave est· armazenada.
+     * Obt√©m uma {@link SecretKey} a partir de um {@link File}.
+     * @param arquivo Arquivo no qual a chave est√° armazenada.
      * @param algoritmo Veja {@link SecretKeyFactory#getInstance(String)}
      */
     public static SecretKey obterChaveSimetrica( File arquivo, String algoritmo ) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -120,7 +120,7 @@ public class SegurancaUtil {
     }
     
     /**
-     * ObtÈm uma {@link SecretKey} AES a partir de um {@link File}.
+     * Obt√©m uma {@link SecretKey} AES a partir de um {@link File}.
      * @see #obterChaveSimetrica(File, String)
      */
     public static SecretKey obterChaveSimetrica( File arquivo ) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -128,8 +128,8 @@ public class SegurancaUtil {
     }
     
     /**
-     * ObtÈm uma {@link PublicKey} a partir de um {@link File}, formato X.509.
-     * @param arquivo Arquivo no qual a chave est· armazenada.
+     * Obt√©m uma {@link PublicKey} a partir de um {@link File}, formato X.509.
+     * @param arquivo Arquivo no qual a chave est√° armazenada.
      * @param algoritmo Veja {@link KeyFactory#getInstance(String)}
      */
     public static PublicKey obterChavePublica( File arquivo, String algoritmo ) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -141,7 +141,7 @@ public class SegurancaUtil {
     }
     
     /**
-     * ObtÈm uma {@link PublicKey} RSA a partir de um {@link File}, formato X.509.
+     * Obt√©m uma {@link PublicKey} RSA a partir de um {@link File}, formato X.509.
      * @see #obterChavePublica(File, String)
      */
     public static PublicKey obterChavePublica( File arquivo ) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -149,8 +149,8 @@ public class SegurancaUtil {
     }
     
     /**
-     * ObtÈm uma {@link PrivateKey} a partir de um {@link File}, formato PKCS#8.
-     * @param arquivo Arquivo no qual a chave est· armazenada.
+     * Obt√©m uma {@link PrivateKey} a partir de um {@link File}, formato PKCS#8.
+     * @param arquivo Arquivo no qual a chave est√° armazenada.
      * @param algoritmo Veja {@link KeyFactory#getInstance(String)}
      */
     public static PrivateKey obterChavePrivada( File arquivo, String algoritmo ) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -162,7 +162,7 @@ public class SegurancaUtil {
     }
     
     /**
-     * ObtÈm uma {@link PrivateKey} RSA a partir de um {@link File}, formato PKCS#8.
+     * Obt√©m uma {@link PrivateKey} RSA a partir de um {@link File}, formato PKCS#8.
      * @see #obterChavePrivada(File, String)
      */
     public static PrivateKey obterChavePrivada( File arquivo ) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -170,10 +170,10 @@ public class SegurancaUtil {
     }
     
     /**
-     * {@link Signature#sign() Assina} digitalmente um conte˙do.
-     * @param conteudo Conte˙do a ser assinado digitalmente.
+     * {@link Signature#sign() Assina} digitalmente um conte√∫do.
+     * @param conteudo Conte√∫do a ser assinado digitalmente.
      * @param algoritmo Ver {@link Signature#getInstance(String)}.
-     * @return assinatura digital do conte˙do.
+     * @return assinatura digital do conte√∫do.
      */
     public static byte[] assinar( byte[] conteudo, String algoritmo, PrivateKey chave ) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
         Signature caneta = Signature.getInstance( algoritmo );
@@ -183,9 +183,9 @@ public class SegurancaUtil {
     }
     
     /**
-     * {@link Signature#sign() Assina} digitalmente um conte˙do com "SHA256withRSA".
-     * @param conteudo Conte˙do a ser assinado digitalmente.
-     * @return assinatura digital do conte˙do.
+     * {@link Signature#sign() Assina} digitalmente um conte√∫do com "SHA256withRSA".
+     * @param conteudo Conte√∫do a ser assinado digitalmente.
+     * @return assinatura digital do conte√∫do.
      * @see #assinar(byte[], String, PrivateKey)
      */
     public static byte[] assinar( byte[] conteudo, PrivateKey chave ) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
@@ -193,11 +193,11 @@ public class SegurancaUtil {
     }
     
     /**
-     * {@link Signature#verify(byte[])}  Verifica} a originalidade de um conte˙do assinado digitalmente.
-     * @param assinatura Assinatura digital do conte˙do.
-     * @param conteudo Conte˙do original.
+     * {@link Signature#verify(byte[])}  Verifica} a originalidade de um conte√∫do assinado digitalmente.
+     * @param assinatura Assinatura digital do conte√∫do.
+     * @param conteudo Conte√∫do original.
      * @param algoritmo Ver {@link Signature#getInstance(String)}.
-     * @return true, se assinatura compatÌvel com conte˙do.
+     * @return true, se assinatura compat√≠vel com conte√∫do.
      */
     public static boolean verificar( byte[] assinatura, byte[] conteudo, String algoritmo, PublicKey chave ) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
         Signature caneta = Signature.getInstance( algoritmo );
@@ -207,10 +207,10 @@ public class SegurancaUtil {
     }
     
     /**
-     * {@link Signature#verify(byte[])}  Verifica} a originalidade de um conte˙do assinado digitalmente com "SHA256withRSA".
-     * @param assinatura Assinatura digital do conte˙do.
-     * @param conteudo Conte˙do original.
-     * @return true, se assinatura compatÌvel com conte˙do.
+     * {@link Signature#verify(byte[])}  Verifica} a originalidade de um conte√∫do assinado digitalmente com "SHA256withRSA".
+     * @param assinatura Assinatura digital do conte√∫do.
+     * @param conteudo Conte√∫do original.
+     * @return true, se assinatura compat√≠vel com conte√∫do.
      * @see #verificar(byte[], byte[], String, PublicKey)
      */
     public static boolean verificar( byte[] assinatura, byte[] conteudo, PublicKey chave ) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException {
@@ -230,10 +230,10 @@ public class SegurancaUtil {
     }
     
     /**
-     * {@link Cipher Codifica} um conte˙do de acordo com um mÈtodo criptogr·fico.
-     * @param conteudo Conte˙do a ser codificado.
+     * {@link Cipher Codifica} um conte√∫do de acordo com um m√©todo criptogr√°fico.
+     * @param conteudo Conte√∫do a ser codificado.
      * @param transformacao Veja {@link Cipher#getInstance(String)}
-     * @return conte˙do codificado.
+     * @return conte√∫do codificado.
      * @see Cipher
      * @see Cipher#ENCRYPT_MODE
      */
@@ -248,7 +248,7 @@ public class SegurancaUtil {
     }
     
     /**
-     * {@link Cipher Codifica} um conte˙do utilizando "RSA/ECB/PKCS1Padding", se chave assimÈtrica, ou "AES/CBC/PKCS5Padding", se chave simÈtrica.
+     * {@link Cipher Codifica} um conte√∫do utilizando "RSA/ECB/PKCS1Padding", se chave assim√©trica, ou "AES/CBC/PKCS5Padding", se chave sim√©trica.
      * @see #codificar(byte[], String, Key, IvParameterSpec)
      */
     public static byte[] codificar( byte[] conteudo, Key chave, IvParameterSpec iv )
@@ -266,10 +266,10 @@ public class SegurancaUtil {
     }
     
     /**
-     * {@link Cipher Decodifica} um conte˙do de acordo com um mÈtodo criptogr·fico.
-     * @param conteudo Conte˙do a ser decodificado.
+     * {@link Cipher Decodifica} um conte√∫do de acordo com um m√©todo criptogr√°fico.
+     * @param conteudo Conte√∫do a ser decodificado.
      * @param transformacao Veja {@link Cipher#getInstance(String)}
-     * @return conte˙do decodificado.
+     * @return conte√∫do decodificado.
      * @see Cipher
      * @see Cipher#DECRYPT_MODE
      */
@@ -284,7 +284,7 @@ public class SegurancaUtil {
     }
     
     /**
-     * {@link Cipher Decodifica} um conte˙do utilizando "RSA/ECB/PKCS1Padding", se chave assimÈtrica, ou "AES/CBC/PKCS5Padding", se chave simÈtrica.
+     * {@link Cipher Decodifica} um conte√∫do utilizando "RSA/ECB/PKCS1Padding", se chave assim√©trica, ou "AES/CBC/PKCS5Padding", se chave sim√©trica.
      * @see #decodificar(byte[], String, Key, IvParameterSpec)
      */
     public static byte[] decodificar( byte[] conteudo, Key chave, IvParameterSpec iv )

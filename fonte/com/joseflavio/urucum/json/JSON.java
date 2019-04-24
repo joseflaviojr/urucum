@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Copyright (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *  
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *  
@@ -19,22 +19,22 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Direitos Autorais Reservados (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  * 
- *  Este arquivo È parte de Urucum - <http://joseflavio.com/urucum/>.
+ *  Este arquivo √© parte de Urucum - <http://joseflavio.com/urucum/>.
  * 
- *  Urucum È software livre: vocÍ pode redistribuÌ-lo e/ou modific·-lo
- *  sob os termos da LicenÁa P˙blica Menos Geral GNU conforme publicada pela
- *  Free Software Foundation, tanto a vers„o 3 da LicenÁa, como
- *  (a seu critÈrio) qualquer vers„o posterior.
+ *  Urucum √© software livre: voc√™ pode redistribu√≠-lo e/ou modific√°-lo
+ *  sob os termos da Licen√ßa P√∫blica Menos Geral GNU conforme publicada pela
+ *  Free Software Foundation, tanto a vers√£o 3 da Licen√ßa, como
+ *  (a seu crit√©rio) qualquer vers√£o posterior.
  * 
- *  Urucum È distribuÌdo na expectativa de que seja ˙til,
- *  porÈm, SEM NENHUMA GARANTIA; nem mesmo a garantia implÌcita de
- *  COMERCIABILIDADE ou ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a
- *  LicenÁa P˙blica Menos Geral do GNU para mais detalhes.
+ *  Urucum √© distribu√≠do na expectativa de que seja √∫til,
+ *  por√©m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de
+ *  COMERCIABILIDADE ou ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a
+ *  Licen√ßa P√∫blica Menos Geral do GNU para mais detalhes.
  * 
- *  VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Menos Geral do GNU
- *  junto com Urucum. Se n„o, veja <http://www.gnu.org/licenses/>.
+ *  Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Menos Geral do GNU
+ *  junto com Urucum. Se n√£o, veja <http://www.gnu.org/licenses/>.
  */
 
 package com.joseflavio.urucum.json;
@@ -59,11 +59,11 @@ import org.json.JSONObject;
 import org.json.JSONPointer;
 import org.json.JSONTokener;
 
-//TODO Revisar sempre: herdar todos os mÈtodos possÌveis.
+//TODO Revisar sempre: herdar todos os m√©todos poss√≠veis.
 
 /**
- * DecoraÁ„o e otimizaÁ„o de {@link JSONObject}.
- * @author JosÈ Fl·vio de Souza Dias J˙nior
+ * Decora√ß√£o e otimiza√ß√£o de {@link JSONObject}.
+ * @author Jos√© Fl√°vio de Souza Dias J√∫nior
  */
 @JsonTypeInfo(use=JsonTypeInfo.Id.NONE)
 @JsonSerialize(using=JSONSerializador.class)
@@ -104,13 +104,13 @@ public class JSON extends JSONObject implements Serializable {
 	}
 
 	/**
-	 * ConstrÛi um {@link JSON} com base num objeto especificado textualmente.
-	 * Por questıes de desempenho, se assim desejar, a convers„o efetiva ocorrer· somente quando
-	 * algum mÈtodo desta classe for chamado, com exceÁ„o de {@link #toString()}, que
-	 * inicialmente poder· retornar o texto-fonte fornecido. No caso de n„o optar por convers„o imediata,
-	 * deve-se garantir que o texto-fonte esteja correto, pois a verificaÁ„o ser· tardia.
+	 * Constr√≥i um {@link JSON} com base num objeto especificado textualmente.
+	 * Por quest√µes de desempenho, se assim desejar, a convers√£o efetiva ocorrer√° somente quando
+	 * algum m√©todo desta classe for chamado, com exce√ß√£o de {@link #toString()}, que
+	 * inicialmente poder√° retornar o texto-fonte fornecido. No caso de n√£o optar por convers√£o imediata,
+	 * deve-se garantir que o texto-fonte esteja correto, pois a verifica√ß√£o ser√° tardia.
 	 * @param fonte Texto-fonte do objeto.
-	 * @param conversaoImediata Realizar convers„o imediata do texto-fonte para {@link JSON}?
+	 * @param conversaoImediata Realizar convers√£o imediata do texto-fonte para {@link JSON}?
 	 * @see JSONObject#JSONObject(String)
 	 */
 	public JSON( String fonte, boolean conversaoImediata ) throws JSONException {
@@ -123,7 +123,7 @@ public class JSON extends JSONObject implements Serializable {
 	}
 
 	/**
-	 * {@link JSON#JSON(String, boolean)} sem convers„o imediata.
+	 * {@link JSON#JSON(String, boolean)} sem convers√£o imediata.
 	 */
 	public JSON( String fonte ) throws JSONException {
 		this( fonte, false );
@@ -152,7 +152,7 @@ public class JSON extends JSONObject implements Serializable {
 
 	/**
 	 * {@link JSON} com as mesmas chaves e valores contidos no {@link JSONObject} indicado.<br>
-	 * … feita uma inclus„o direta, sem realizar {@link Object#clone() clone} ou transformaÁ„o.
+	 * √â feita uma inclus√£o direta, sem realizar {@link Object#clone() clone} ou transforma√ß√£o.
 	 */
 	public JSON( JSONObject json ) {
 		for( String k : json.keySet() ){

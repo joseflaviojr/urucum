@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Copyright (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *  
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *  
@@ -19,22 +19,22 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Direitos Autorais Reservados (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  * 
- *  Este arquivo È parte de Urucum - <http://joseflavio.com/urucum/>.
+ *  Este arquivo √© parte de Urucum - <http://joseflavio.com/urucum/>.
  * 
- *  Urucum È software livre: vocÍ pode redistribuÌ-lo e/ou modific·-lo
- *  sob os termos da LicenÁa P˙blica Menos Geral GNU conforme publicada pela
- *  Free Software Foundation, tanto a vers„o 3 da LicenÁa, como
- *  (a seu critÈrio) qualquer vers„o posterior.
+ *  Urucum √© software livre: voc√™ pode redistribu√≠-lo e/ou modific√°-lo
+ *  sob os termos da Licen√ßa P√∫blica Menos Geral GNU conforme publicada pela
+ *  Free Software Foundation, tanto a vers√£o 3 da Licen√ßa, como
+ *  (a seu crit√©rio) qualquer vers√£o posterior.
  * 
- *  Urucum È distribuÌdo na expectativa de que seja ˙til,
- *  porÈm, SEM NENHUMA GARANTIA; nem mesmo a garantia implÌcita de
- *  COMERCIABILIDADE ou ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a
- *  LicenÁa P˙blica Menos Geral do GNU para mais detalhes.
+ *  Urucum √© distribu√≠do na expectativa de que seja √∫til,
+ *  por√©m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de
+ *  COMERCIABILIDADE ou ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a
+ *  Licen√ßa P√∫blica Menos Geral do GNU para mais detalhes.
  * 
- *  VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Menos Geral do GNU
- *  junto com Urucum. Se n„o, veja <http://www.gnu.org/licenses/>.
+ *  Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Menos Geral do GNU
+ *  junto com Urucum. Se n√£o, veja <http://www.gnu.org/licenses/>.
  */
 
 package com.joseflavio.urucum.javabeans;
@@ -45,14 +45,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Utilit·rios para JavaBeans.
- * @author JosÈ Fl·vio de Souza Dias J˙nior
+ * Utilit√°rios para JavaBeans.
+ * @author Jos√© Fl√°vio de Souza Dias J√∫nior
  */
 public class JavaBeansUtil {
 
 	/**
 	 * Procura por um {@link Field} de uma {@link Class}, incluindo a hierarquia desta.
-	 * @return <code>null</code>, se n„o encontrar o {@link Field}.
+	 * @return <code>null</code>, se n√£o encontrar o {@link Field}.
 	 */
 	public static Field procurarCampo( Class<?> classe, String nome ) {
 		
@@ -72,7 +72,7 @@ public class JavaBeansUtil {
 	
 	/**
 	 * Procura pelo {@link Method} "get" correspondente a um {@link Field} de uma {@link Class}, incluindo a hierarquia desta.
-	 * @return <code>null</code>, se n„o encontrar o {@link Field} ou o {@link Method}.
+	 * @return <code>null</code>, se n√£o encontrar o {@link Field} ou o {@link Method}.
 	 */
 	public static Method procurarGet( Class<?> classe, String campoNome ) {
 		
@@ -98,7 +98,7 @@ public class JavaBeansUtil {
 	
 	/**
 	 * Procura pelo {@link Method} "get" correspondente a um {@link Field}, a partir da {@link Field#getDeclaringClass()}.
-	 * @return <code>null</code>, se n„o encontrar o {@link Method}.
+	 * @return <code>null</code>, se n√£o encontrar o {@link Method}.
 	 */
 	public static Method procurarGet( Field campo ) {
 		
@@ -125,7 +125,7 @@ public class JavaBeansUtil {
 	
 	/**
 	 * Procura pelo {@link Method} "set" correspondente a um {@link Field} de uma {@link Class}, incluindo a hierarquia desta.
-	 * @return <code>null</code>, se n„o encontrar o {@link Field} ou o {@link Method}.
+	 * @return <code>null</code>, se n√£o encontrar o {@link Field} ou o {@link Method}.
 	 */
 	public static Method procurarSet( Class<?> classe, String campoNome ) {
 		
@@ -150,7 +150,7 @@ public class JavaBeansUtil {
 	
 	/**
 	 * Procura pelo {@link Method} "set" correspondente a um {@link Field}, a partir da {@link Field#getDeclaringClass()}.
-	 * @return <code>null</code>, se n„o encontrar o {@link Method}.
+	 * @return <code>null</code>, se n√£o encontrar o {@link Method}.
 	 */
 	public static Method procurarSet( Field campo ) {
 		

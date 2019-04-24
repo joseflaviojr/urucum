@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Copyright (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *  
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *  
@@ -19,22 +19,22 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Direitos Autorais Reservados (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  * 
- *  Este arquivo È parte de Urucum - <http://joseflavio.com/urucum/>.
+ *  Este arquivo √© parte de Urucum - <http://joseflavio.com/urucum/>.
  * 
- *  Urucum È software livre: vocÍ pode redistribuÌ-lo e/ou modific·-lo
- *  sob os termos da LicenÁa P˙blica Menos Geral GNU conforme publicada pela
- *  Free Software Foundation, tanto a vers„o 3 da LicenÁa, como
- *  (a seu critÈrio) qualquer vers„o posterior.
+ *  Urucum √© software livre: voc√™ pode redistribu√≠-lo e/ou modific√°-lo
+ *  sob os termos da Licen√ßa P√∫blica Menos Geral GNU conforme publicada pela
+ *  Free Software Foundation, tanto a vers√£o 3 da Licen√ßa, como
+ *  (a seu crit√©rio) qualquer vers√£o posterior.
  * 
- *  Urucum È distribuÌdo na expectativa de que seja ˙til,
- *  porÈm, SEM NENHUMA GARANTIA; nem mesmo a garantia implÌcita de
- *  COMERCIABILIDADE ou ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a
- *  LicenÁa P˙blica Menos Geral do GNU para mais detalhes.
+ *  Urucum √© distribu√≠do na expectativa de que seja √∫til,
+ *  por√©m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de
+ *  COMERCIABILIDADE ou ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a
+ *  Licen√ßa P√∫blica Menos Geral do GNU para mais detalhes.
  * 
- *  VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Menos Geral do GNU
- *  junto com Urucum. Se n„o, veja <http://www.gnu.org/licenses/>.
+ *  Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Menos Geral do GNU
+ *  junto com Urucum. Se n√£o, veja <http://www.gnu.org/licenses/>.
  */
 
 package com.joseflavio.urucum.comunicacao;
@@ -47,7 +47,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 /**
  * Mensagem de {@link Resposta}.
- * @author JosÈ Fl·vio de Souza Dias J˙nior
+ * @author Jos√© Fl√°vio de Souza Dias J√∫nior
  */
 public class Mensagem implements Serializable {
 
@@ -96,7 +96,7 @@ public class Mensagem implements Serializable {
 	}
 	
 	/**
-	 * @param tipo O {@link Tipo} n„o deve ser <code>null</code>.
+	 * @param tipo O {@link Tipo} n√£o deve ser <code>null</code>.
 	 */
 	public Mensagem setTipo( Tipo tipo ) {
 		if( tipo == null ) throw new IllegalArgumentException( "tipo" );
@@ -105,7 +105,7 @@ public class Mensagem implements Serializable {
 	}
 	
 	/**
-	 * IdentificaÁ„o do objeto/funÁ„o ao qual esta {@link Mensagem} se refere, podendo ser <code>null</code>.
+	 * Identifica√ß√£o do objeto/fun√ß√£o ao qual esta {@link Mensagem} se refere, podendo ser <code>null</code>.
 	 */
 	public String getReferencia() {
 		return referencia;
@@ -135,7 +135,7 @@ public class Mensagem implements Serializable {
 	public static enum Tipo {
 		
 		/**
-		 * {@link String Texto} que ratifica uma atividade finalizada com Íxito.
+		 * {@link String Texto} que ratifica uma atividade finalizada com √™xito.
 		 * @see Resposta#isExito()
 		 */
 		EXITO,
@@ -146,17 +146,17 @@ public class Mensagem implements Serializable {
 		INFORMACAO,
 		
 		/**
-		 * {@link String Texto} que alerta sobre algo que ainda n„o derivou um {@link Tipo#ERRO erro}.
+		 * {@link String Texto} que alerta sobre algo que ainda n√£o derivou um {@link Tipo#ERRO erro}.
 		 */
 		ATENCAO,
 		
 		/**
-		 * {@link String Texto} sobre uma ocorrÍncia de erro, normalmente impeditiva de {@link Resposta#isExito() Íxito}.
+		 * {@link String Texto} sobre uma ocorr√™ncia de erro, normalmente impeditiva de {@link Resposta#isExito() √™xito}.
 		 */
 		ERRO,
 		
 		/**
-		 * AÁ„o da qual se deseja a execuÁ„o. Consiste normalmente na chamada de um mÈtodo/funÁ„o,
+		 * A√ß√£o da qual se deseja a execu√ß√£o. Consiste normalmente na chamada de um m√©todo/fun√ß√£o,
 		 * especificado por {@link Mensagem#getReferencia()}, para o qual
 		 * se repassa o {@link Mensagem#getArgumento()}.
 		 */

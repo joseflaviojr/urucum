@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Copyright (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *  
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *  
@@ -19,22 +19,22 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Direitos Autorais Reservados (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  * 
- *  Este arquivo È parte de Urucum - <http://joseflavio.com/urucum/>.
+ *  Este arquivo √© parte de Urucum - <http://joseflavio.com/urucum/>.
  * 
- *  Urucum È software livre: vocÍ pode redistribuÌ-lo e/ou modific·-lo
- *  sob os termos da LicenÁa P˙blica Menos Geral GNU conforme publicada pela
- *  Free Software Foundation, tanto a vers„o 3 da LicenÁa, como
- *  (a seu critÈrio) qualquer vers„o posterior.
+ *  Urucum √© software livre: voc√™ pode redistribu√≠-lo e/ou modific√°-lo
+ *  sob os termos da Licen√ßa P√∫blica Menos Geral GNU conforme publicada pela
+ *  Free Software Foundation, tanto a vers√£o 3 da Licen√ßa, como
+ *  (a seu crit√©rio) qualquer vers√£o posterior.
  * 
- *  Urucum È distribuÌdo na expectativa de que seja ˙til,
- *  porÈm, SEM NENHUMA GARANTIA; nem mesmo a garantia implÌcita de
- *  COMERCIABILIDADE ou ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a
- *  LicenÁa P˙blica Menos Geral do GNU para mais detalhes.
+ *  Urucum √© distribu√≠do na expectativa de que seja √∫til,
+ *  por√©m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de
+ *  COMERCIABILIDADE ou ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a
+ *  Licen√ßa P√∫blica Menos Geral do GNU para mais detalhes.
  * 
- *  VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Menos Geral do GNU
- *  junto com Urucum. Se n„o, veja <http://www.gnu.org/licenses/>.
+ *  Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Menos Geral do GNU
+ *  junto com Urucum. Se n√£o, veja <http://www.gnu.org/licenses/>.
  */
 
 package com.joseflavio.urucum.validacao;
@@ -55,14 +55,14 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 /**
- * Utilit·rios relacionados ‡ {@link Validacao}.
- * @author JosÈ Fl·vio de Souza Dias J˙nior
+ * Utilit√°rios relacionados √† {@link Validacao}.
+ * @author Jos√© Fl√°vio de Souza Dias J√∫nior
  */
 public class ValidacaoUtil {
 	
 	/**
 	 * Valida um objeto conforme as regras de seus {@link Field campos}.<br>
-	 * Regras possÌveis:<br>
+	 * Regras poss√≠veis:<br>
 	 * <ul>
 	 * <li>{@link NaoNulo}</li>
 	 * <li>{@link NaoVazio}</li>
@@ -77,7 +77,7 @@ public class ValidacaoUtil {
 	 * @param args Argumentos para {@link Validador}. Opcional.
 	 * @param fonte {@link ResourceBundle} com as mensagens textuais. Opcional.
 	 * @param desconsiderar {@link Escopo}s a desconsiderar. Opcional.
-	 * @return <code>true</code>, se objeto totalmente v·lido.
+	 * @return <code>true</code>, se objeto totalmente v√°lido.
 	 */
 	public static boolean validar(
 			Object objeto, List<Mensagem> mensagens, boolean recursivamente,
@@ -90,7 +90,7 @@ public class ValidacaoUtil {
 
 	/**
 	 * Valida um {@link Field campo} de um objeto conforme as suas regras.<br>
-	 * Regras possÌveis:<br>
+	 * Regras poss√≠veis:<br>
 	 * <ul>
 	 * <li>{@link NaoNulo}</li>
 	 * <li>{@link NaoVazio}</li>
@@ -99,14 +99,14 @@ public class ValidacaoUtil {
 	 * <li>{@link Formato}</li>
 	 * <li>{@link Validacao}</li>
 	 * </ul>
-	 * @param objeto Objeto do qual o campo ser· validado.
+	 * @param objeto Objeto do qual o campo ser√° validado.
 	 * @param campo Nome do campo a ser validado.
 	 * @param mensagens Destino das {@link Mensagem} geradas.
 	 * @param recursivamente Validar recursivamente os objetos internos a partir do campo?
 	 * @param args Argumentos para {@link Validador}. Opcional.
 	 * @param fonte {@link ResourceBundle} com as mensagens textuais. Opcional.
 	 * @param desconsiderar {@link Escopo}s a desconsiderar. Opcional.
-	 * @return <code>true</code>, se campo totalmente v·lido.
+	 * @return <code>true</code>, se campo totalmente v√°lido.
 	 * @see JavaBeansUtil#procurarCampo(Class, String)
 	 */
 	public static boolean validar(

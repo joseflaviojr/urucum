@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Copyright (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *  
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *  
@@ -19,22 +19,22 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Direitos Autorais Reservados (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  * 
- *  Este arquivo È parte de Urucum - <http://joseflavio.com/urucum/>.
+ *  Este arquivo √© parte de Urucum - <http://joseflavio.com/urucum/>.
  * 
- *  Urucum È software livre: vocÍ pode redistribuÌ-lo e/ou modific·-lo
- *  sob os termos da LicenÁa P˙blica Menos Geral GNU conforme publicada pela
- *  Free Software Foundation, tanto a vers„o 3 da LicenÁa, como
- *  (a seu critÈrio) qualquer vers„o posterior.
+ *  Urucum √© software livre: voc√™ pode redistribu√≠-lo e/ou modific√°-lo
+ *  sob os termos da Licen√ßa P√∫blica Menos Geral GNU conforme publicada pela
+ *  Free Software Foundation, tanto a vers√£o 3 da Licen√ßa, como
+ *  (a seu crit√©rio) qualquer vers√£o posterior.
  * 
- *  Urucum È distribuÌdo na expectativa de que seja ˙til,
- *  porÈm, SEM NENHUMA GARANTIA; nem mesmo a garantia implÌcita de
- *  COMERCIABILIDADE ou ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a
- *  LicenÁa P˙blica Menos Geral do GNU para mais detalhes.
+ *  Urucum √© distribu√≠do na expectativa de que seja √∫til,
+ *  por√©m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de
+ *  COMERCIABILIDADE ou ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a
+ *  Licen√ßa P√∫blica Menos Geral do GNU para mais detalhes.
  * 
- *  VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Menos Geral do GNU
- *  junto com Urucum. Se n„o, veja <http://www.gnu.org/licenses/>.
+ *  Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Menos Geral do GNU
+ *  junto com Urucum. Se n√£o, veja <http://www.gnu.org/licenses/>.
  */
 
 package com.joseflavio.urucum.texto;
@@ -45,15 +45,15 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * Utilit·rios para {@link String}.
- * @author JosÈ Fl·vio de Souza Dias J˙nior
+ * Utilit√°rios para {@link String}.
+ * @author Jos√© Fl√°vio de Souza Dias J√∫nior
  */
 public class StringUtil {
 
 	/**
-	 * {@link MessageFormat Formata} uma mensagem textual, obtendo-a, se necess·rio e se possÌvel, de uma {@link ResourceBundle fonte} sensÌvel ‡ {@link Locale}.
+	 * {@link MessageFormat Formata} uma mensagem textual, obtendo-a, se necess√°rio e se poss√≠vel, de uma {@link ResourceBundle fonte} sens√≠vel √† {@link Locale}.
 	 * @param fonte Fonte de mensagens traduzidas para uma {@link Locale}. Opcional.
-	 * @param mensagem Mensagem ou chave de mensagem desejada. Toda chave deve iniciar com "$" e ser· buscada na {@link ResourceBundle}.
+	 * @param mensagem Mensagem ou chave de mensagem desejada. Toda chave deve iniciar com "$" e ser√° buscada na {@link ResourceBundle}.
 	 * @param argumentos Argumentos para {@link MessageFormat#format(String, Object...)}. Podem iniciar com "$", caracterizando chaves.
 	 * @see MessageFormat
 	 * @see ResourceBundle
@@ -95,7 +95,7 @@ public class StringUtil {
 	 * {@link MessageFormat Formata} uma mensagem de acordo com uma {@link ResourceBundle}.
 	 * @param fonte Fonte de mensagens traduzidas para uma {@link Locale}. Opcional.
 	 * @param mensagem Chave da mensagem a ser buscada na {@link ResourceBundle}, conforme {@link #getMensagem(ResourceBundle, String)}.
-	 * @param argumentos Argumentos para {@link MessageFormat#format(String, Object...)}. {@link String}s ser„o buscadas na {@link ResourceBundle}, conforme {@link #getMensagem(ResourceBundle, String)}.
+	 * @param argumentos Argumentos para {@link MessageFormat#format(String, Object...)}. {@link String}s ser√£o buscadas na {@link ResourceBundle}, conforme {@link #getMensagem(ResourceBundle, String)}.
 	 * @see MessageFormat
 	 * @see ResourceBundle
 	 */
@@ -123,10 +123,10 @@ public class StringUtil {
 	}
 	
 	/**
-	 * ObtÈm uma mensagem de uma {@link ResourceBundle}.
+	 * Obt√©m uma mensagem de uma {@link ResourceBundle}.
 	 * @param fonte Fonte de mensagens traduzidas para uma {@link Locale}. Opcional.
-	 * @param chave Chave da mensagem desejada. O primeiro {@link String#charAt(int) caractere} da chave ser· desconsiderado se ele for igual a '$'.
-	 * @return o valor original da chave, caso a mensagem n„o seja encontrada.
+	 * @param chave Chave da mensagem desejada. O primeiro {@link String#charAt(int) caractere} da chave ser√° desconsiderado se ele for igual a '$'.
+	 * @return o valor original da chave, caso a mensagem n√£o seja encontrada.
 	 */
 	public static String getMensagem( ResourceBundle fonte, String chave ) {
 		try{

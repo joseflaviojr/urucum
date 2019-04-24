@@ -1,6 +1,6 @@
 
 /*
- *  Copyright (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Copyright (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *
  *  This file is part of Urucum - <http://joseflavio.com/urucum/>.
  *
@@ -19,22 +19,22 @@
  */
 
 /*
- *  Direitos Autorais Reservados (C) 2016-2018 JosÈ Fl·vio de Souza Dias J˙nior
+ *  Direitos Autorais Reservados (C) 2016-2018 Jos√© Fl√°vio de Souza Dias J√∫nior
  *
- *  Este arquivo È parte de Urucum - <http://joseflavio.com/urucum/>.
+ *  Este arquivo √© parte de Urucum - <http://joseflavio.com/urucum/>.
  *
- *  Urucum È software livre: vocÍ pode redistribuÌ-lo e/ou modific·-lo
- *  sob os termos da LicenÁa P˙blica Menos Geral GNU conforme publicada pela
- *  Free Software Foundation, tanto a vers„o 3 da LicenÁa, como
- *  (a seu critÈrio) qualquer vers„o posterior.
+ *  Urucum √© software livre: voc√™ pode redistribu√≠-lo e/ou modific√°-lo
+ *  sob os termos da Licen√ßa P√∫blica Menos Geral GNU conforme publicada pela
+ *  Free Software Foundation, tanto a vers√£o 3 da Licen√ßa, como
+ *  (a seu crit√©rio) qualquer vers√£o posterior.
  *
- *  Urucum È distribuÌdo na expectativa de que seja ˙til,
- *  porÈm, SEM NENHUMA GARANTIA; nem mesmo a garantia implÌcita de
- *  COMERCIABILIDADE ou ADEQUA«√O A UMA FINALIDADE ESPECÕFICA. Consulte a
- *  LicenÁa P˙blica Menos Geral do GNU para mais detalhes.
+ *  Urucum √© distribu√≠do na expectativa de que seja √∫til,
+ *  por√©m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl√≠cita de
+ *  COMERCIABILIDADE ou ADEQUA√á√ÉO A UMA FINALIDADE ESPEC√çFICA. Consulte a
+ *  Licen√ßa P√∫blica Menos Geral do GNU para mais detalhes.
  *
- *  VocÍ deve ter recebido uma cÛpia da LicenÁa P˙blica Menos Geral do GNU
- *  junto com Urucum. Se n„o, veja <http://www.gnu.org/licenses/>.
+ *  Voc√™ deve ter recebido uma c√≥pia da Licen√ßa P√∫blica Menos Geral do GNU
+ *  junto com Urucum. Se n√£o, veja <http://www.gnu.org/licenses/>.
  */
 
 package com.joseflavio.urucum.tucurui;
@@ -53,13 +53,13 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 /**
- * Utilit·rios para {@link Tucurui}.
- * @author JosÈ Fl·vio de Souza Dias J˙nior
+ * Utilit√°rios para {@link Tucurui}.
+ * @author Jos√© Fl√°vio de Souza Dias J√∫nior
  */
 public class TucuruiUtil {
     
     /**
-     * Cria um documento {@link Tucurui} com base no conte˙do de um {@link File}.
+     * Cria um documento {@link Tucurui} com base no conte√∫do de um {@link File}.
      * @see #abrir(URL)
      */
     public static Tucurui abrir( File arquivo ) throws IOException, TucuruiException {
@@ -80,7 +80,7 @@ public class TucuruiUtil {
     }
     
     /**
-     * Cria um documento {@link Tucurui} com base no conte˙do de um {@link File}.
+     * Cria um documento {@link Tucurui} com base no conte√∫do de um {@link File}.
      * @see #abrir(File)
      */
     public static Tucurui abrir( String arquivo ) throws IOException, TucuruiException {
@@ -88,7 +88,7 @@ public class TucuruiUtil {
     }
     
     /**
-     * Cria um documento {@link Tucurui} com base no conte˙do de uma {@link URL}.
+     * Cria um documento {@link Tucurui} com base no conte√∫do de uma {@link URL}.
      * @see #abrir(File)
      */
     public static Tucurui abrir( URL url ) throws IOException, TucuruiException {
@@ -109,7 +109,7 @@ public class TucuruiUtil {
     }
     
     /**
-     * Cria um documento {@link Tucurui} com base no conte˙do de um {@link Reader}.
+     * Cria um documento {@link Tucurui} com base no conte√∫do de um {@link Reader}.
      */
     public static Tucurui abrir( Reader conteudo ) throws IOException, TucuruiException {
         
@@ -120,7 +120,7 @@ public class TucuruiUtil {
                 (BufferedReader) conteudo :
                 new BufferedReader( conteudo );
     
-        // Controle do TucuruÌ
+        // Controle do Tucuru√≠
         
         Tucurui tucurui = new Tucurui();
         Hierarquia mae = tucurui;
@@ -130,12 +130,12 @@ public class TucuruiUtil {
         String linha  = null;
         int    nlinha = 0;
         
-        // Controle de cabeÁalho
+        // Controle de cabe√ßalho
         
         boolean obterVersao = true;
         boolean obterModelo = true;
         
-        // InterpretaÁ„o das linhas
+        // Interpreta√ß√£o das linhas
         
         while( ( linha = br.readLine() ) != null ){
     
@@ -144,7 +144,7 @@ public class TucuruiUtil {
             int tamanho = linha.length();
             if( tamanho == 0 ) continue;
             
-            // Vers„o, CodificaÁ„o e Modelo
+            // Vers√£o, Codifica√ß√£o e Modelo
             
             if( obterVersao || obterModelo ){
                 
@@ -172,7 +172,7 @@ public class TucuruiUtil {
                 
             }
             
-            // IndentaÁ„o e Hierarquia
+            // Indenta√ß√£o e Hierarquia
             
             int esp = 0;
             int tab = 0;
@@ -196,7 +196,7 @@ public class TucuruiUtil {
             
             // Elementos
             
-            if( linha.startsWith( "//" ) ){ //Coment·rio
+            if( linha.startsWith( "//" ) ){ //Coment√°rio
                 
                 Comentario comentario = new Comentario( linha.substring( 2 ) );
                 
@@ -245,7 +245,7 @@ public class TucuruiUtil {
                 if( valor != null ) throw novaTucuruiException( TucuruiException.Erro.VALOR_LIVRE_NAO_FECHADO, nlinha );
                 
                 
-            }else if( linha.charAt( 0 ) == ':' ){ //Objeto anÙnimo (valor n„o livre)
+            }else if( linha.charAt( 0 ) == ':' ){ //Objeto an√¥nimo (valor n√£o livre)
     
                 if( tamanho == 1 || linha.charAt( 1 ) != ' ' ) throw novaTucuruiException( TucuruiException.Erro.ESPACO_ESPERADO, nlinha );
                 
@@ -345,7 +345,7 @@ public class TucuruiUtil {
      * {@link Transformer#transform(Source, Result) Transforma} um documento {@link Tucurui} em XML, conforme um {@link Transformer}.
      * @param tucurui {@link Tucurui} a ser transformado.
      * @param transformador {@link Transformer}.
-     * @param destino Destino do resultado da transformaÁ„o.
+     * @param destino Destino do resultado da transforma√ß√£o.
      * @param codificacao {@link Charset}.
      * @see #gerarXML(Tucurui, OutputStream, String)
      * @see #gerarHTML(Tucurui, OutputStream, String)
@@ -362,7 +362,7 @@ public class TucuruiUtil {
     /**
      * Transforma um documento {@link Tucurui} em XML.
      * @param tucurui {@link Tucurui} a ser transformado.
-     * @param destino Destino do resultado da transformaÁ„o.
+     * @param destino Destino do resultado da transforma√ß√£o.
      * @param codificacao {@link Charset}.
      * @see #transformar(Tucurui, Transformer, OutputStream, String)
      */
@@ -382,7 +382,7 @@ public class TucuruiUtil {
     /**
      * Transforma um documento {@link Tucurui} em HTML.
      * @param tucurui {@link Tucurui} a ser transformado.
-     * @param destino Destino do resultado da transformaÁ„o.
+     * @param destino Destino do resultado da transforma√ß√£o.
      * @param codificacao {@link Charset}.
      * @see #transformar(Tucurui, Transformer, OutputStream, String)
      */
