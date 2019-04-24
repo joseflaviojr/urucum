@@ -6,18 +6,18 @@ Tools for Java software development.
 
 ## Versão Atual
 
-1.0-A12
+1.0-A13
 
 Padrão de versionamento: [JFV](http://joseflavio.com/jfv)
 
 ## Como Usar
 
-A Urucum está disponível como biblioteca Java no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A12%7Cjar).
+A Urucum está disponível como biblioteca Java no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A13%7Cjar).
 
 Gradle:
 
 ```
-compile 'com.joseflavio:urucum:1.0-A12'
+compile 'com.joseflavio:urucum:1.0-A13'
 ```
 
 Maven:
@@ -26,7 +26,7 @@ Maven:
 <dependency>
     <groupId>com.joseflavio</groupId>
     <artifactId>urucum</artifactId>
-    <version>1.0-A12</version>
+    <version>1.0-A13</version>
 </dependency>
 ```
 
@@ -65,7 +65,7 @@ gradle clean build
 
 ## Publicação
 
-Para compilar e publicar os arquivos finais do projeto no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A12%7Cjar), executar no terminal:
+Para compilar e publicar os arquivos finais do projeto no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A13%7Cjar), executar no terminal:
 
 ```sh
 gradle clean uploadArchives

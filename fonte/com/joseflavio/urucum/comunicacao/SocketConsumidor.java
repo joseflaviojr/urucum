@@ -39,16 +39,19 @@
 
 package com.joseflavio.urucum.comunicacao;
 
-import javax.net.ssl.*;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.security.cert.Certificate;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.TrustManager;
 
 /**
  * {@link Consumidor} baseado em {@link Socket}.
@@ -94,30 +97,18 @@ public class SocketConsumidor implements Consumidor {
 				if( ignorarCertificado ){
 			        
 			        contexto.init(
-			        		null,
-			        		new TrustManager[]{ new IgnoranteTrustManager() },
-			        		new SecureRandom()
-			        	);
+						null,
+						new TrustManager[]{ new InseguroX509TrustManager() },
+						new SecureRandom()
+					);
 			        
 				}else{
 					
-					String tsArquivo = System.getProperty( "javax.net.ssl.trustStore" );
-					String tsSenha   = System.getProperty( "javax.net.ssl.trustStorePassword" );
-					String tsTipo    = System.getProperty( "javax.net.ssl.trustStoreType" );
-					
-					if( tsArquivo != null && ! new File( tsArquivo ).exists() ) tsArquivo = null;
-					if( tsSenha == null ) tsSenha = "";
-					if( tsTipo == null ) tsTipo = "jks";
-
-					KeyStore ks = KeyStore.getInstance( tsTipo );
-					FileInputStream tsArquivo_is = tsArquivo != null ? new FileInputStream( tsArquivo ) : null;
-					ks.load( tsArquivo_is, tsSenha.toCharArray() );
-					if( tsArquivo_is != null ) tsArquivo_is.close();
-					
-					TrustManagerFactory tmf = TrustManagerFactory.getInstance( TrustManagerFactory.getDefaultAlgorithm() );
-					tmf.init( ks );
-					
-					contexto.init( null, tmf.getTrustManagers(), new SecureRandom() );
+					contexto.init(
+						null,
+						ComunicacaoUtil.iniciarTrustManagerFactory().getTrustManagers(),
+						new SecureRandom()
+					);
 					
 				}
 				
@@ -208,19 +199,6 @@ public class SocketConsumidor implements Consumidor {
 	@Override
 	public String toString() {
 		return socket == null ? "" : socket.getInetAddress().getHostName() + ":" + socket.getPort();
-	}
-	
-	private static class IgnoranteTrustManager implements X509TrustManager {
-		@Override
-		public X509Certificate[] getAcceptedIssuers() {
-			return new X509Certificate[0];
-		}
-		@Override
-		public void checkClientTrusted( X509Certificate[] x509CertificateArray, String string ) throws CertificateException {
-		}
-		@Override
-		public void checkServerTrusted( X509Certificate[] x509CertificateArray, String string ) throws CertificateException {
-		}
 	}
 	
 	private class InputStreamImpl extends InputStream {

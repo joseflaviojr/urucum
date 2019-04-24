@@ -83,7 +83,43 @@ public class ValidacaoUtil {
 			Object objeto, List<Mensagem> mensagens, boolean recursivamente,
 			Map<String,Object> args, ResourceBundle fonte, Set<String> desconsiderar )
 			throws IllegalAccessException, InstantiationException, InvocationTargetException {
-		return validar0( objeto, mensagens, recursivamente, args, fonte, desconsiderar, new HashSet<Object>() );
+
+		return validar0( objeto, null, mensagens, recursivamente, args, fonte, desconsiderar, new HashSet<Object>() );
+
+	}
+
+	/**
+	 * Valida um {@link Field campo} de um objeto conforme as suas regras.<br>
+	 * Regras possíveis:<br>
+	 * <ul>
+	 * <li>{@link NaoNulo}</li>
+	 * <li>{@link NaoVazio}</li>
+	 * <li>{@link Tamanho}</li>
+	 * <li>{@link LimiteNumerico}</li>
+	 * <li>{@link Formato}</li>
+	 * <li>{@link Validacao}</li>
+	 * </ul>
+	 * @param objeto Objeto do qual o campo será validado.
+	 * @param campo Nome do campo a ser validado.
+	 * @param mensagens Destino das {@link Mensagem} geradas.
+	 * @param recursivamente Validar recursivamente os objetos internos a partir do campo?
+	 * @param args Argumentos para {@link Validador}. Opcional.
+	 * @param fonte {@link ResourceBundle} com as mensagens textuais. Opcional.
+	 * @param desconsiderar {@link Escopo}s a desconsiderar. Opcional.
+	 * @return <code>true</code>, se campo totalmente válido.
+	 * @see JavaBeansUtil#procurarCampo(Class, String)
+	 */
+	public static boolean validar(
+			Object objeto, String campo, List<Mensagem> mensagens, boolean recursivamente,
+			Map<String,Object> args, ResourceBundle fonte, Set<String> desconsiderar )
+			throws IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchFieldException {
+
+		Field field = JavaBeansUtil.procurarCampo( objeto.getClass(), campo );
+
+		if( field == null ) throw new NoSuchFieldException( campo );
+
+		return validar0( objeto, new Field[]{ field }, mensagens, recursivamente, args, fonte, desconsiderar, new HashSet<Object>() );
+
 	}
 	
 	/**
@@ -108,7 +144,7 @@ public class ValidacaoUtil {
 	}
 	
 	private static boolean validar0(
-			Object objeto, List<Mensagem> mensagens, boolean recursivamente,
+			Object objeto, Field[] campos, List<Mensagem> mensagens, boolean recursivamente,
 			Map<String,Object> args, ResourceBundle fonte, Set<String> desconsiderar, Set<Object> validados )
 			throws IllegalAccessException, InstantiationException, InvocationTargetException {
 		
@@ -117,8 +153,10 @@ public class ValidacaoUtil {
 		boolean      objetoValido = true;
 		Class<?>     classe       = objeto.getClass();
 		List<Object> msgArgs      = null;
-		
-		for( Field campo : JavaBeansUtil.getCampos( classe ) ){
+
+		if( campos == null ) campos = JavaBeansUtil.getCampos( classe ).toArray( new Field[0] );
+
+		for( Field campo : campos ){
 			
 			Regras regrasAnot = campo.getAnnotation( Regras.class );
 			Field regras = regrasAnot != null ? JavaBeansUtil.procurarCampo( regrasAnot.classe(), regrasAnot.campo() ) : campo;
@@ -295,7 +333,7 @@ public class ValidacaoUtil {
 				! tipo.isArray() && ! tipo.isPrimitive() &&
 				! tipoNome.startsWith( "java." ) && ! tipoNome.startsWith( "javax." ) &&
 				! validados.contains( valor ) ){
-				if( ! validar0( valor, mensagens, recursivamente, args, fonte, desconsiderar, validados ) ){
+				if( ! validar0( valor, null, mensagens, recursivamente, args, fonte, desconsiderar, validados ) ){
 					objetoValido = false;
 				}
 			}

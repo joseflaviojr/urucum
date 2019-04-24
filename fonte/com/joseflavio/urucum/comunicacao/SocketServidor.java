@@ -39,15 +39,10 @@
 
 package com.joseflavio.urucum.comunicacao;
 
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLServerSocket;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.security.KeyStore;
-import java.security.SecureRandom;
+
+import javax.net.ssl.SSLServerSocket;
 
 /**
  * {@link Servidor} baseado em {@link ServerSocket}.
@@ -68,12 +63,9 @@ public class SocketServidor implements Servidor {
 	private boolean fechado = false;
 	
 	/**
-	 * {@link Servidor} baseado em {@link ServerSocket}.<br>
-	 * Caso se opte por comunicação segura (TLS/SSL), deve-se especificar
-	 * as {@link System#setProperty(String, String) propriedades} "javax.net.ssl.keyStore"
-	 * e "javax.net.ssl.keyStorePassword".
+	 * {@link Servidor} baseado em {@link ServerSocket}.
 	 * @param porta Veja {@link ServerSocket#getLocalPort()}
-	 * @param segura Utilizar {@link SSLServerSocket}?
+	 * @param segura Utilizar {@link SSLServerSocket}? Veja {@link ComunicacaoUtil#iniciarSSLContext()}.
 	 * @param resiliente Ser resiliente a falhas?
 	 */
 	public SocketServidor( int porta, boolean segura, boolean resiliente ) throws IOException {
@@ -102,31 +94,12 @@ public class SocketServidor implements Servidor {
 		try{
 			
 			if( segura ){
-				
-				String ksArquivo = System.getProperty( "javax.net.ssl.keyStore" );
-				String ksSenha   = System.getProperty( "javax.net.ssl.keyStorePassword" );
-				String ksTipo    = System.getProperty( "javax.net.ssl.keyStoreType" );
-				
-				if( ksArquivo != null && ! new File( ksArquivo ).exists() ) ksArquivo = null;
-				if( ksSenha == null ) ksSenha = "";
-				if( ksTipo == null ) ksTipo = "jks";
-				
-				KeyStore ks = KeyStore.getInstance( ksTipo );
-				FileInputStream ksArquivo_is = ksArquivo != null ? new FileInputStream( ksArquivo ) : null;
-				ks.load( ksArquivo_is, ksSenha.toCharArray() );
-				if( ksArquivo_is != null ) ksArquivo_is.close();
-				
-				KeyManagerFactory kmf = KeyManagerFactory.getInstance( KeyManagerFactory.getDefaultAlgorithm() );
-				kmf.init( ks, ksSenha.toCharArray() );
-
-				SSLContext contexto = SSLContext.getInstance( "TLS" );
-				contexto.init( kmf.getKeyManagers(), null, new SecureRandom() );
-				socket = contexto.getServerSocketFactory().createServerSocket( porta );
-				
+				socket = ComunicacaoUtil
+					.iniciarSSLContext()
+					.getServerSocketFactory()
+					.createServerSocket( porta );
 			}else{
-				
 			    socket = new ServerSocket( porta );
-			    
 			}
 			
 		}catch( IOException e ){
