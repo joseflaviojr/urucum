@@ -13,7 +13,7 @@ String descricao = "Utilitários para desenvolvimento de software em Java."
 
 group = "com.joseflavio"
 archivesBaseName = "urucum"
-version = "1.0-A13"
+version = "1.0-A14"
 
 //------------------------------------------------------
 
@@ -56,8 +56,9 @@ repositories {
 
 dependencies {
     compile fileTree(dir:"biblioteca", include:["*.jar"])
-    compile "org.json:json:20180813"
-    compile "com.fasterxml.jackson.core:jackson-databind:2.9.8"
+    compile "com.ibm.icu:icu4j:64.2"
+    compile "org.json:json:20190722"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.9.9.3"
     compile "com.sun.activation:javax.activation:1.2.0"
     testCompile "junit:junit:4.12"
 }

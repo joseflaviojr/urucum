@@ -39,10 +39,11 @@
 
 package com.joseflavio.urucum.texto;
 
-import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import com.ibm.icu.text.MessageFormat;
 
 /**
  * Utilitários para {@link String}.
