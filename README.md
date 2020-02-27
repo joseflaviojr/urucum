@@ -6,18 +6,18 @@ Tools for Java software development.
 
 ## Versão Atual
 
-1.0-A14 (Fase de Nascimento)
+1.0-A15 (Fase de Nascimento)
 
 Padrão de versionamento: [JFV](http://joseflavio.com/jfv)
 
 ## Como Usar
 
-A Urucum está disponível como biblioteca Java no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A14%7Cjar).
+A Urucum está disponível como biblioteca Java no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A15%7Cjar).
 
 Gradle:
 
 ```
-compile 'com.joseflavio:urucum:1.0-A14'
+compile 'com.joseflavio:urucum:1.0-A15'
 ```
 
 Maven:
@@ -26,7 +26,7 @@ Maven:
 <dependency>
     <groupId>com.joseflavio</groupId>
     <artifactId>urucum</artifactId>
-    <version>1.0-A14</version>
+    <version>1.0-A15</version>
 </dependency>
 ```
 
@@ -65,7 +65,7 @@ gradle clean build
 
 ## Publicação
 
-Para compilar e publicar os arquivos finais do projeto no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A14%7Cjar), executar no terminal:
+Para compilar e publicar os arquivos finais do projeto no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A15%7Cjar), executar no terminal:
 
 ```sh
 gradle clean uploadArchives
@@ -75,7 +75,7 @@ gradle clean uploadArchives
 
 ### Português
 
-Direitos Autorais Reservados &copy; 2016-2019 [José Flávio de Souza Dias Júnior](http://joseflavio.com)
+Direitos Autorais Reservados &copy; 2016-2020 [José Flávio de Souza Dias Júnior](http://joseflavio.com)
 
 Este arquivo é parte de Urucum - [http://joseflavio.com/urucum](http://joseflavio.com/urucum).
 
@@ -94,7 +94,7 @@ junto com Urucum. Se não, veja [https://www.gnu.org/licenses/lgpl.html](https:/
 
 ### English
 
-Copyright &copy; 2016-2019 [José Flávio de Souza Dias Júnior](http://joseflavio.com)
+Copyright &copy; 2016-2020 [José Flávio de Souza Dias Júnior](http://joseflavio.com)
 
 This file is part of Urucum - [http://joseflavio.com/urucum](http://joseflavio.com/urucum).
 
