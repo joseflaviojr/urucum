@@ -1,51 +1,31 @@
 //------------------------------------------------------
 
-apply plugin: "java"
-apply plugin: "maven"
-apply plugin: "signing"
-apply plugin: "eclipse"
-apply plugin: "idea"
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'signing'
+    id 'eclipse'
+    id 'idea'
+}
 
 //------------------------------------------------------
 
-String nome = "Urucum"
-String descricao = "Utilitários para desenvolvimento de software em Java."
+String nome      = 'Urucum'
+String descricao = 'Utilitários para desenvolvimento de software em Java.'
 
-group = "com.joseflavio"
-archivesBaseName = "urucum"
-version = "1.0-A15"
-
-//------------------------------------------------------
-
-[
-
-"biblioteca", // Dependências diretas: *.jar
-"fonte",      // Código fonte: *.java
-"recurso",    // Anexos que serão embutidos no ".jar"
-"projeto",    // Arquivos de projeto: doc, svg, psd, etc.
-"rascunho"    // Arquivos temporários e descartáveis
-
-].each { new File(it).mkdirs() }
+group   = 'com.joseflavio'
+version = '1.0-A15'
 
 //------------------------------------------------------
 
-float javaVersao = 1.8
-String codificacao = "UTF-8"
+float  javaVersao  = 1.8
+String codificacao = 'UTF-8'
 
 sourceCompatibility = javaVersao
+targetCompatibility = javaVersao
 
 tasks.withType(JavaCompile) {
     options.encoding = codificacao
-}
-
-tasks.withType(GroovyCompile) {
-    options.encoding = codificacao
-    groovyOptions.encoding = codificacao
-}
-
-sourceSets {
-    main.java.srcDirs = ["fonte"]
-    main.resources.srcDirs = ["recurso"]
 }
 
 //------------------------------------------------------
@@ -54,127 +34,128 @@ repositories {
     mavenCentral()
 }
 
+//------------------------------------------------------
+
 dependencies {
-    compile fileTree(dir:"biblioteca", include:["*.jar"])
-    compile "com.ibm.icu:icu4j:65.1"
-    compile "org.json:json:20190722"
-    compile "com.fasterxml.jackson.core:jackson-databind:2.10.2"
-    compile "com.sun.activation:javax.activation:1.2.0"
-    testCompile "junit:junit:4.13"
+    implementation fileTree(dir:'lib', include:['*.jar'])
+    implementation 'com.ibm.icu:icu4j:65.1'
+    api 'org.json:json:20190722'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
+    implementation 'com.sun.activation:javax.activation:1.2.0'
+    testImplementation 'junit:junit:4.13'
 }
 
 //------------------------------------------------------
 
 jar {
     manifest {
-        attributes "Implementation-Title": nome,
-                   "Implementation-Version": version,
-                   "Class-Path": configurations.compile.collect{ it.getName() }.join(" ")
+        attributes 'Implementation-Title': nome,
+                   'Implementation-Version': archiveVersion,
+                   'Class-Path': configurations.runtimeClasspath.collect{ it.getName() }.join(' ')
     }
 }
 
 //------------------------------------------------------
 
-task jarFonte(type: Jar) {
-    
-    classifier = "sources"
-    from sourceSets.main.allSource
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
 
-    manifest {
-        attributes "Implementation-Title": nome + " - Codigo Fonte",
-                   "Implementation-Version": version,
-                   "Main-Class": ""
+//------------------------------------------------------
+
+javadoc {
+    if( JavaVersion.current().isJava9Compatible() ){
+        options.addBooleanOption('html5', true)
+    }
+}
+
+//------------------------------------------------------
+
+task copiarDeps(type: Copy) {
+    from configurations.runtimeClasspath
+    into "$buildDir/deps"
+}
+
+//------------------------------------------------------
+
+publishing {
+
+    repositories {
+        maven {
+
+            def releasesURL  = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
+            def snapshotsURL = 'https://oss.sonatype.org/content/repositories/snapshots/'
+            
+            url = version.endsWith('SNAPSHOT') ? snapshotsURL : releasesURL
+
+            credentials {
+                username = 'xxxxxx'
+                password = 'xxxxxx'
+            }
+
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+
+            from components.java
+
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+
+            pom {
+                
+                name        = nome
+                description = descricao
+                url         = 'http://joseflavio.com/urucum'
+
+                licenses {
+                    license {
+                        name = 'GNU Lesser General Public License, Version 3'
+                        url  = 'http://www.gnu.org/licenses/lgpl.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id    = 'joseflaviojr'
+                        name  = 'José Flávio de Souza Dias Júnior'
+                        email = 'email@joseflavio.com'
+                    }
+                }
+
+                scm {
+                    connection          = 'scm:git:ssh:git@github.com/joseflaviojr/urucum.git'
+                    developerConnection = 'scm:git:ssh:git@github.com/joseflaviojr/urucum.git'
+                    url                 = 'https://github.com/joseflaviojr/urucum.git'
+                }
+
+            }
+        }
+
     }
 
 }
 
 //------------------------------------------------------
-
-task jarDoc(type: Jar) {
-
-    classifier = "javadoc"
-    from javadoc
-
-    javadoc.options.encoding = codificacao
-    javadoc.failOnError = false
-    javadoc.title = nome + " " + version
-    javadoc.options.links = []
-    
-}
-
-//------------------------------------------------------
-
-task jarDep(type: Copy) {
-    into "$buildDir/dependencias"
-    from configurations.compile
-}
-
-build.dependsOn jarDep
-
-//------------------------------------------------------
-
-artifacts {
-    archives jarFonte, jarDoc
-}
 
 signing {
-    required { gradle.taskGraph.hasTask("uploadArchives") }
-    sign configurations.archives
-}
-
-uploadArchives {
-  repositories {
-    mavenDeployer {
-
-      beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-        authentication( userName: "xxxxxx", password: "xxxxxx" )
-      }
-
-      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-        authentication( userName: "xxxxxx", password: "xxxxxx" )
-      }
-
-      pom.project {
-
-        name nome
-        packaging "jar"
-        description descricao
-        url "http://joseflavio.com/urucum"
-
-        scm {
-          connection "scm:git:ssh:git@github.com/joseflaviojr/urucum.git"
-          developerConnection "scm:git:ssh:git@github.com/joseflaviojr/urucum.git"
-          url "https://github.com/joseflaviojr/urucum.git"
-        }
-
-        licenses {
-          license {
-            name "GNU Lesser General Public License, Version 3"
-            url "http://www.gnu.org/licenses/lgpl.txt"
-          }
-        }
-
-        developers {
-          developer {
-            id "joseflaviojr"
-            name "José Flávio de Souza Dias Júnior"
-            email "email@joseflavio.com"
-          }
-        }
-
-      }
-
-    }
-  }
+    sign publishing.publications.mavenJava
 }
 
 //------------------------------------------------------
 
 eclipse {
     project {
-        name = archivesBaseName
+        name    = rootProject.name
         comment = descricao
     }
     jdt {
@@ -185,8 +166,8 @@ eclipse {
 
 eclipseJdt {
     doLast {
-        file(".settings/org.eclipse.core.resources.prefs").text =
-            "eclipse.preferences.version=1\nencoding/<project>=" + codificacao
+        file('.settings/org.eclipse.core.resources.prefs').text =
+            'eclipse.preferences.version=1\nencoding/<project>=' + codificacao
     }
 }
 
@@ -194,18 +175,16 @@ eclipseJdt {
 
 idea {
     project {
-        vcs = "Git"
+        languageLevel = new org.gradle.plugins.ide.idea.model.IdeaLanguageLevel(javaVersao)
+        jdkName = '' + javaVersao
+        vcs = 'Git'
         ipr {
             withXml {
-                def projeto = it.asNode()
-                def encoding = projeto.component.find { it.@name == "Encoding" }
-                encoding.appendNode("file", [url: "PROJECT", charset: codificacao])
+                def projeto  = it.asNode()
+                def encoding = projeto.component.find { it.@name == 'Encoding' }
+                encoding.appendNode('file', [url: 'PROJECT', charset: codificacao])
             }
         }
-    }
-    module {
-        languageLevel = new org.gradle.plugins.ide.idea.model.IdeaLanguageLevel(javaVersao)
-        jdkName = "" + javaVersao
     }
 }
 
