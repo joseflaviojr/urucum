@@ -38,9 +38,9 @@ repositories {
 
 dependencies {
     implementation fileTree(dir:'lib', include:['*.jar'])
-    implementation 'com.ibm.icu:icu4j:65.1'
-    api 'org.json:json:20190722'
-    api 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
+    implementation 'com.ibm.icu:icu4j:68.2'
+    api 'org.json:json:20201115'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
     implementation 'com.sun.activation:javax.activation:1.2.0'
     testImplementation 'junit:junit:4.13'
 }
