@@ -14,7 +14,7 @@ String nome      = 'Urucum'
 String descricao = 'Utilitários para desenvolvimento de software em Java.'
 
 group   = 'com.joseflavio'
-version = '1.0-A15'
+version = '1.0-A16'
 
 //------------------------------------------------------
 
