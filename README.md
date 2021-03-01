@@ -1,8 +1,8 @@
 # Urucum
 
-Utilitários para desenvolvimento de software em Java.
+Classes e métodos frequentemente utilizados no desenvolvimento com linguagem Java.
 
-Tools for Java software development.
+Classes and methods frequently used in Java language development.
 
 ## Versão Atual
 
@@ -16,7 +16,7 @@ A Urucum está disponível como biblioteca Java no repositório [Maven](http://s
 
 Gradle:
 
-```
+```groovy
 implementation 'com.joseflavio:urucum:1.0-A16'
 ```
 

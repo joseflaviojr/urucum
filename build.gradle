@@ -11,7 +11,7 @@ plugins {
 //------------------------------------------------------
 
 String nome      = 'Urucum'
-String descricao = 'Utilitários para desenvolvimento de software em Java.'
+String descricao = 'Classes e métodos frequentemente utilizados no desenvolvimento com linguagem Java.'
 
 group   = 'com.joseflavio'
 version = '1.0-A16'
