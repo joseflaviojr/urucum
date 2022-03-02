@@ -10,7 +10,7 @@ Classes and methods frequently used in Java language development.
 
 Padrão de versionamento: [JFV](http://joseflavio.com/jfv)
 
-## Como Usar
+## Uso
 
 A Urucum está disponível como biblioteca Java no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A16%7Cjar).
 
@@ -42,7 +42,7 @@ A documentação da Urucum, no formato **Javadoc**, está disponível em:
 
 ## Desenvolvimento
 
-Configuração do projeto para Eclipse IDE e IntelliJ IDEA:
+Configurar projeto para Eclipse IDE e IntelliJ IDEA:
 
 ```sh
 gradle cleanEclipse eclipse
@@ -55,9 +55,17 @@ gradle cleanIdea idea
 * Java >= 1.8
 * Gradle >= 4.7
 
-## Compilação
+## Teste
 
-Para compilar o projeto, gerando os arquivos JAR, executar no terminal:
+Executar os testes:
+
+```sh
+gradle clean test
+```
+
+## Distribuição
+
+Compilar e gerar os arquivos de distribuição (JAR):
 
 ```sh
 gradle clean build
@@ -65,7 +73,7 @@ gradle clean build
 
 ## Publicação
 
-Para compilar e publicar os arquivos finais do projeto no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A16%7Cjar), executar no terminal:
+Publicar os arquivos finais do projeto no repositório [Maven](http://search.maven.org/#artifactdetails%7Ccom.joseflavio%7Curucum%7C1.0-A16%7Cjar):
 
 ```sh
 gradle clean publish
