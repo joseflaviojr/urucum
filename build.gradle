@@ -38,14 +38,12 @@ repositories {
 
 dependencies {
     implementation fileTree(dir:'lib', include:['*.jar'])
-    implementation 'com.ibm.icu:icu4j:68.2'
-    api 'org.json:json:20201115'
-    api 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
     implementation 'com.ibm.icu:icu4j:70.1'
     api 'org.json:json:20211205'
     api 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
     implementation 'com.sun.activation:javax.activation:1.2.0'
-    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.3.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
 }
 
 //------------------------------------------------------
@@ -67,6 +65,12 @@ java {
 
 //------------------------------------------------------
 
+test {
+    useJUnitPlatform()
+}
+
+//------------------------------------------------------
+
 javadoc {
     options.addStringOption('Xdoclint:none', '-quiet')
     if( JavaVersion.current().isJava9Compatible() ){
@@ -76,7 +80,6 @@ javadoc {
 
 //------------------------------------------------------
 
-task copiarDeps(type: Copy) {
 task copiarDeps(type: Copy, dependsOn: [jar]) {
     from configurations.runtimeClasspath
     into "$buildDir/deps"
