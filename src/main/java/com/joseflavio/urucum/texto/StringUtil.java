@@ -39,17 +39,21 @@
 
 package com.joseflavio.urucum.texto;
 
+import com.ibm.icu.text.MessageFormat;
+
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-
-import com.ibm.icu.text.MessageFormat;
 
 /**
  * Utilitários para {@link String}.
  * @author José Flávio de Souza Dias Júnior
  */
 public class StringUtil {
+
+	private StringUtil() {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * {@link MessageFormat Formata} uma mensagem textual, obtendo-a, se necessário e se possível, de uma {@link ResourceBundle fonte} sensível à {@link Locale}.
